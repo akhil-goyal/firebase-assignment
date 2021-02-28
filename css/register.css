@@ -1,6 +1,41 @@
+/*------- Generic Css -------*/
 .font-40 {
     font-size: 35px;
 }
+
+.font-50 {
+    font-size: 50px;
+}
+
+.pad-top-10 {
+    padding-top: 0.7em;
+}
+
+.pad-top-5 {
+    padding-top: 0.6em;
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: var(--placeholder-color);
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: var(--placeholder-color);
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: var(--placeholder-color);
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: var(--placeholder-color);
+}
+
+/*------- Header Css -------*/
 
 header {
     background-color: var(--secondary-color);
@@ -12,19 +47,12 @@ header a {
     color: var(--background-color);
 }
 
+/*------- Main Content Css -------*/
+
 .register-form {
     padding: 1em 0.4em;
     border: 1px solid rgb(238, 238, 238);
     margin: 5em 0;
-}
-
-footer {
-    padding: 4px;
-    background-color: black;
-}
-
-footer p {
-    color: white;
 }
 
 .register-form input {
@@ -57,14 +85,6 @@ footer p {
     margin-top: 1em;
 }
 
-.pad-top-10 {
-    padding-top: 0.7em;
-}
-
-.pad-top-5 {
-    padding-top: 0.6em;
-}
-
 .btn-register:hover {
     background-color: var(--secondary-color);
     color: var(--background-color);
@@ -72,34 +92,7 @@ footer p {
     cursor: pointer;
 }
 
-::-webkit-input-placeholder {
-    /* Chrome/Opera/Safari */
-    color: var(--placeholder-color);
-}
-
-::-moz-placeholder {
-    /* Firefox 19+ */
-    color: var(--placeholder-color);
-}
-
-:-ms-input-placeholder {
-    /* IE 10+ */
-    color: var(--placeholder-color);
-}
-
-:-moz-placeholder {
-    /* Firefox 18- */
-    color: var(--placeholder-color);
-}
-
-.font-50 {
-    font-size: 50px;
-}
-
-.social-buttons img {
-    height: 50px;
-    padding-bottom: 10px;
-}
+/*------- Profile Photo Css -------*/
 
 .profile-pic {
     position: relative;
@@ -119,8 +112,24 @@ footer p {
     display: none;
 }
 
-.profile-photo-span {    
+.profile-photo-span {
     font-size: 12px;
     top: 5px;
     position: relative;
+}
+
+/*------- Footer Css -------*/
+
+footer {
+    padding: 4px;
+    background-color: black;
+}
+
+footer p {
+    color: white;
+}
+
+footer .social-buttons img {
+    height: 50px;
+    padding-bottom: 10px;
 }

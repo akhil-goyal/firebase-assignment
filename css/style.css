@@ -93,3 +93,28 @@
     justify-items: right;
     justify-content: flex-end;
 }
+
+
+
+/*---------- Error Styling -----------*/
+
+.error-effect {
+    animation: shake 0.4s linear;
+    border: 0;
+    border-bottom: 1px solid var(--error-color) !important;
+}
+  
+@keyframes shake{ 
+  0%{ 
+    transform: translateX(0) 
+  } 
+  25%{ 
+    transform: translateX(25px); 
+  }    
+  50%{ 
+    transform: translateX(-25px); 
+  } 
+  100%{ 
+    transform: translateX(0px); 
+  } 
+} 

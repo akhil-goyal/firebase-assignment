@@ -22,14 +22,14 @@
         <div class="container">
             <div class="grid grid-cols-2">
                 <div class="logo">
-                    <a href="">Logo</a>
+                    <a href="#">Logo</a>
                 </div>
                 <div>
                     <nav>
                         <ul class="flex flex-right flex-gap-2">
-                            <li><a href="">Home</a></li>
-                            <li><a href="">About</a></li>
-                            <li><a href="">Contact</a></li>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -39,7 +39,7 @@
     <main>
         <section class="register-section">
             <div class="smallContainer text-center">
-                <form method="POST" autocomplete="off" class="register-form shadow">
+                <form method="POST" autocomplete="off" enctype="multipart/form-data" class="register-form shadow">
                     <div class="plain-text">
                         <h1 class="font-40 pad-bottom-10">Sign Up</h1>
                         <span>Already a member? <a class="primary-color" href="../pages/login.html">Log In</a></span>
@@ -48,16 +48,17 @@
                         <img alt="User Pic" src="../resources/images/user_avatar.png" id="profile-image1">
                         <input id="profile-image-upload" type="file" onchange="previewFile()">
                         <div class="plain-text"> </div>
-                        <span id="profile-photo-span" class="profile-photo-span">Upload Profile Photo Here <br/>(optional)</span>
+                        <span id="profile-photo-span" class="profile-photo-span">Upload Profile Photo Here
+                            <br />(optional)</span>
                     </div>
                     <div>
-                        <input type="text" placeholder="Full Name">
+                        <input type="text" required placeholder="Full Name">
                     </div>
                     <div>
-                        <input type="email" placeholder="Email Address">
+                        <input type="email" required placeholder="Email Address">
                     </div>
                     <div>
-                        <input type="password" placeholder="Password">
+                        <input type="password" required placeholder="Password">
                     </div>
                     <div>
                         <button type="submit" class="btn btn-register">Sign Up</button>
@@ -67,10 +68,10 @@
                     </div>
                     <div>
                         <div class="grid grid-cols-2 grid-space social-buttons pad-top-10">
-                            <a class="primary-color text-right font-50" href=""><img
+                            <a class="primary-color text-right font-50" href="#"><img
                                     src="../resources/images/facebook.svg" alt="" /></a>
-                            <a class="primary-color text-left font-50" href=""><img src="../resources/images/google.svg"
-                                    alt="" /></a>
+                            <a class="primary-color text-left font-50" href="#"><img
+                                    src="../resources/images/google.svg" alt="" /></a>
                         </div>
                     </div>
                 </form>

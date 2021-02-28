@@ -5,6 +5,7 @@
     --background-color: #000;
     --secondary-color: #ffffff;
     --placeholder-color: rgb(146, 146, 146);
+    --error-color: rgb(245, 11, 11);
 }
 
 * {
