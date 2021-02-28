@@ -44,6 +44,12 @@
                         <h1 class="font-40 pad-bottom-10">Sign Up</h1>
                         <span>Already a member? <a class="primary-color" href="../pages/login.html">Log In</a></span>
                     </div>
+                    <div class="profile-pic pad-top-5">
+                        <img alt="User Pic" src="../resources/images/user_avatar.png" id="profile-image1">
+                        <input id="profile-image-upload" type="file" onchange="previewFile()">
+                        <div class="plain-text"> </div>
+                        <span id="profile-photo-span" class="profile-photo-span">Upload Profile Photo Here <br/>(optional)</span>
+                    </div>
                     <div>
                         <input type="text" placeholder="Full Name">
                     </div>
@@ -61,14 +67,17 @@
                     </div>
                     <div>
                         <div class="grid grid-cols-2 grid-space social-buttons pad-top-10">
-                            <a class="primary-color text-right font-50" href=""><img src="../resources/images/facebook.svg" alt="" /></a>
-                            <a class="primary-color text-left font-50" href=""><img src="../resources/images/google.svg" alt="" /></a>
+                            <a class="primary-color text-right font-50" href=""><img
+                                    src="../resources/images/facebook.svg" alt="" /></a>
+                            <a class="primary-color text-left font-50" href=""><img src="../resources/images/google.svg"
+                                    alt="" /></a>
                         </div>
                     </div>
                 </form>
             </div>
 
         </section>
+        <script src="../js/index.js"></script>
     </main>
     <footer>
         <div class="container">
