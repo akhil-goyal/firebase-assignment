@@ -1,32 +1,35 @@
-// facebook integration
-window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '418235822574294',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v10.0'
+function facebookLogin() {
+
+    event.preventDefault();
+    var provider = new firebase.auth.FacebookAuthProvider();
+
+    firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // The signed-in user info.
+        var user = result.user;
+
+        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+        var accessToken = credential.accessToken;
+
+        console.log(result);
+
+        // ...
+    })
+    .catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+
+        console.log(error);
+        // ...
     });
-      
-    FB.AppEvents.logPageView();   
-      
-};
-
-(function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-
-// check a person's login status
-function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-}
-
-function statusChangeCallback(fbResponse) {
-    console.log(fbResponse);
 }
