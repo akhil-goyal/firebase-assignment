@@ -18,7 +18,6 @@
 </head>
 
 <body>
-    <script src="../js/facebook.js"></script>
     <header>
         <div class="container">
             <div class="grid grid-cols-2">
@@ -64,7 +63,7 @@
                         <div class="grid grid-cols-2 grid-space social-buttons pad-top-10">
                             <a class="primary-color text-right font-50" href="#" onclick="facebookLogin();"><img
                                     src="../resources/images/facebook.svg" alt="" /></a>
-                            <a class="primary-color text-left font-50" href="#"><img src="../resources/images/google.svg"
+                            <a class="primary-color text-left font-50" href="#" onclick="googleLogin();"><img src="../resources/images/google.svg"
                                     alt="" /></a>
                         </div>
                     </div>
@@ -79,7 +78,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
 
     <script src="../js/firebase.js"></script>
-
+    <script src="../js/auth.js"></script>
 
 </body>
 
