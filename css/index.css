@@ -1,0 +1,89 @@
+.section-hero {
+    height: 100vh;
+    background-color: #2F57D7;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../resources/images/bg_grey.svg) center center;
+    background-size: cover;
+    position: relative;
+    justify-content: center;
+    text-align: center;
+}
+
+.content {
+    padding-top: 27vh;
+}
+
+.buttons {
+    padding-top: 32vh;
+}
+
+.tech-talks {
+    font-size: 3em;
+    color: #fff;
+    /* padding-top: 27vh; */
+    font-weight: bold;
+}
+
+.btn-explore {
+    padding: 1em 6em;
+    background-color: #213D96;
+    border: 0.1em solid #fff;
+    color: #fff;
+    width: 20em;
+    /* margin-top: 30vh; */
+    transition: width 0.4s;
+    font-size: 18px;
+}
+
+.transparent-button {
+    background: none;
+    border: 0;
+    outline: 0;
+}
+
+.arrow-down {
+    color: #fff;
+    width: 100%;
+    /* padding-top: 2em; */
+    position: relative;
+}
+
+.arrow-down i {
+    font-size: 1.4em;
+}
+
+.btn-explore:hover {
+    cursor: pointer;
+    width: 22em;
+    transition: width 0.4s;
+    -webkit-box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+    /* Firefox 3.5 - 3.6 */
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19);
+    /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.bounce {
+    animation: bounce 2s infinite;
+    padding: 4em 0 2em 0;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-30px);
+    }
+    60% {
+        transform: translateY(-15px);
+    }
+}
+
+.nav-options li a {
+    color: white;
+}
+
+.nav {
+    padding: 1em 0;
+}
