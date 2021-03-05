@@ -13,7 +13,7 @@
 }
 
 .buttons {
-    padding-top: 32vh;
+    padding-top: 30vh;
 }
 
 .tech-talks {
@@ -65,7 +65,7 @@
 
 .bounce {
     animation: bounce 2s infinite;
-    padding: 4em 0 2em 0;
+    padding: 4em 0 1em 0;
 }
 
 @keyframes bounce {
