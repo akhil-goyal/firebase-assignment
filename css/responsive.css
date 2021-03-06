@@ -26,3 +26,11 @@
         padding-top: 40vh;
     }
 }
+@media (min-width: 3000px) {
+    .content {
+        padding-top: 30vh;
+    }
+    .buttons {
+        padding-top: 45vh;
+    }
+}
