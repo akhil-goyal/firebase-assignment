@@ -20,16 +20,14 @@
 <body>
     <header>
         <div class="container">
-            <div class="grid grid-cols-2">
-                <div class="logo">
-                    <a href="#">Logo</a>
-                </div>
-                <div>
+            <div class="nav grid grid-cols-2">
+                <div class="logo"></div>
+                <div class="nav-options">
                     <nav>
-                        <ul class="flex flex-right flex-gap-2">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Contact</a></li>
+                        <ul class="flex flex-gap-2 flex-right">
+                            <li><a href="../index.html">Home</a></li>
+                            <li><a href="">Threads</a></li>
+                            <li><a href="">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -79,7 +77,31 @@
         </section>
         <script src="../js/index.js"></script>
     </main>
-    <footer></footer>
+    <footer>
+        <div class="footer-container">
+            <div class="grid grid-cols-2">
+                <div class="footer-content grid grid-cols-1">
+                    <div class="flex flex-left flex-gap-2">
+                        <a href=""><i class="fab fa-facebook social-icon"></i></a>
+                        <a href=""><i class="fab fa-twitter social-icon"></i></a>
+                        <a href=""><i class="fab fa-youtube social-icon"></i></a>
+                        <a href=""><i class="fab fa-linkedin social-icon"></i></a>
+                    </div>
+                    <div>
+                        <p class="footer-pad-top-20">&copy; 2021 by Tech Talks. </p>
+                    </div>
+                </div>
+                <div class="footer-content text-center">
+                    <h3>Subscribe to Tech Talks!</h3>
+                    <div class="footer-pad-top-20 text-right">
+                        <input type="text">
+                        <button class="transparent-button"><i class="fas fa-arrow-circle-right"></i></button>
+                    </div>
+                </div>
+                <p class="footer-pad-top-30 grid-span-thread-2 text-center">Proudly created by <b>Nitish Kumar, Akhil Goyal and Priyanka Nilesh Patel</b></p>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

@@ -6,6 +6,9 @@
     --secondary-color: #ffffff;
     --placeholder-color: rgb(146, 146, 146);
     --error-color: rgb(245, 11, 11);
+    --website-color: #213D96;
+    --website-secondary-color: #2647A3;
+    --webite-additional-color: #2F57D7;
 }
 
 * {
