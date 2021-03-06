@@ -20,7 +20,7 @@
 
 /* Extra large devices (large desktops, 1200px and up) */
 
-@media (min-width: 2000px) {
+@media (min-width: 1600px) {
     .content {
         padding-top: 36vh;
     }

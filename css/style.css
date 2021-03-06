@@ -12,6 +12,16 @@
     margin: 0 auto;
 }
 
+.footer-container {
+    max-width: 1300px;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.color-primary {
+   color: #213D96;
+}
+
 /*------- Generic Css -------*/
 
 .text-center {
@@ -81,6 +91,11 @@
     grid-column: 2/ span 7;
 }
 
+
+.grid-gap-5 {
+    gap: 5em;
+}
+
 .flex {
     display: flex;
 }
@@ -92,6 +107,11 @@
 .flex-right {
     justify-items: right;
     justify-content: flex-end;
+}
+
+.flex-left {
+    justify-items: left;
+    justify-content: flex-start;
 }
 
 
