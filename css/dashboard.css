@@ -1,12 +1,13 @@
 .menu-options {
     background-color: var(--website-color);
-    overflow: auto;
+    overflow: hidden;
     border-right: 1px solid var(--background-color);
+    height: 100vh;
+    position: fixed;
 }
 
 .thread-control {
     overflow-y: auto;
-    height: 100vh;
 }
 
 .profile-pic img {
@@ -197,4 +198,125 @@ footer {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+
+.new-thread {
+    padding: 2em;
+}
+
+.new-thread a {
+    font-weight: bold;
+}
+
+.thread-image {
+    height: 40px;
+    width: 40px;
+}
+
+.name-bar {
+    position: relative;
+    top: 9px;
+    left: 10px;
+}
+
+.online-user {
+    font-size: 6px;
+    top: 17px;
+    left: 5px;
+    position: relative;
+    color: lightgreen;
+}
+
+.thread {
+    padding: 2em 3em;
+    border: 1px solid #c2c2c2;
+    width: 60%;
+    margin-left: 2em;
+    margin-bottom: 2em;
+}
+
+.thread-content {
+    padding-left: 0.4em;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid var(--website-color);
+}
+
+.thread-content p {
+    padding: 0.6em 0 0 0;
+}
+
+.plain-content p:nth-child(1) {
+    color: var(--website-color);
+}
+
+.thread-attachments img {
+    height: 50px;
+    width: 40px;
+    padding: 0.6em 0 0 0;
+}
+
+.user-comment {
+    padding-top: 0.8em;
+    padding-left: 0.6em;
+}
+
+.comment-user-image {
+    height: 20px;
+    width: 20px;    
+    position: relative;
+    top: 9px;
+}
+
+.comment:not(:last-child) {
+    padding-bottom: 0.5em;
+    border-bottom: 1px dotted var(--background-color);
+
+}
+
+.add-comment {
+    margin: 1em 0;
+    padding: 1em 0;
+}
+
+.add-comment img {
+    height: 10px;
+    width: 10px;
+}
+
+.add-comment input {
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid var(--background-color);
+    padding: 0.2em 0.5em 0.2em 0;
+    width: 80%;
+    font-size: 16px;
+}
+
+.add-comment button {
+    width: 20%;
+    margin-left: 1em;
+}
+
+.color-website {
+    color: var(--website-color);
+}
+
+.comment-input {
+    padding-top: 1em;
+}
+
+.post-button {
+    background-color: var(--website-color);
+    border: 1px solid var(--website-color);
+    color: var(--secondary-color);
+}
+.post-button:hover {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--background-color);
+    color: var(--website-color);
+    cursor: pointer;
+}
+
+.thread-comments {
+    padding: 0.5em 0;
 }
