@@ -1,0 +1,200 @@
+.menu-options {
+    background-color: var(--website-color);
+    overflow: auto;
+    border-right: 1px solid var(--background-color);
+}
+
+.thread-control {
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.profile-pic img {
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px 0px #c1c1c1;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+}
+
+.pad-top-4 {
+    padding-top: 6em;
+}
+
+#profile-image-upload {
+    display: none;
+}
+
+.profile-photo-span {
+    font-size: 12px;
+    top: 1em;
+    position: relative;
+}
+
+.color-white {
+    color: var(--secondary-color);
+}
+
+.pad-top-2 {
+    padding: 2em 0;
+}
+
+.text-search {
+    background-color: var(--website-color);
+    border: 0;
+    border-bottom: 2px solid white;
+    outline: 0;
+    width: 60%;
+    font-size: 16px;
+    color: white;
+}
+
+::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: var(--secondary-color);
+    opacity: 0.3;
+}
+
+::-moz-placeholder {
+    /* Firefox 19+ */
+    color: var(--secondary-color);
+    opacity: 0.3;
+}
+
+:-ms-input-placeholder {
+    /* IE 10+ */
+    color: var(--secondary-color);
+    opacity: 0.3;
+}
+
+:-moz-placeholder {
+    /* Firefox 18- */
+    color: var(--secondary-color);
+    opacity: 0.3;
+}
+
+.nav-options li {
+    padding: 1em;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+.active-option a {
+    color: var(--background-color) !important;
+    font-weight: bold !important;
+}
+
+.nav-options li a {
+    color: var(--secondary-color);
+    font-weight: normal;
+}
+
+.nav-options li:nth-child(1) {
+    border-top: 1px solid var(--secondary-color);
+}
+
+.nav-options li:hover, .nav-options li:hover a {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    font-weight: bold;
+}
+
+.active-option {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+}
+
+.active-friends {
+    border-left: 1px solid var(--background-color);
+    height: 100vh;
+}
+
+footer {
+    border-top: 1px solid #fff;
+}
+
+.new-thread-box {
+    padding: 2em;
+}
+
+.pad-top-1 {
+    padding-top: 1em;
+}
+
+.new-thread-box .label-form {
+    display: block;
+    padding: 0.4em 0;
+}
+
+.new-thread-box input, .new-thread-box textarea {
+    width: 90%;
+    resize: none;
+    padding: 1em;
+    font-size: 14px;
+    border: 2px solid var(--background-color);
+    margin-bottom: 1em;
+}
+
+.new-thread-box input {
+    height: 3em;
+}
+
+.new-thread-box button {
+    background-color: var(--website-color);
+    color: var(--secondary-color);
+    border: 1px solid var(--background-color);
+    padding: 1.2em 8em;
+    margin-top: 2em;
+}
+
+.new-thread-box button:hover {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+    border: 1px solid var(--website-color);
+    cursor: pointer;
+}
+
+.fileUpload label {
+    padding: 0.5rem;
+    font-family: sans-serif;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.div-uplaoded-doc {
+    background-color: var(--website-color);
+    color: white;
+    padding: 0.5em 0.6em;
+    border-radius: 20px;
+    display: block;
+    width: 40%;
+    margin: 0.2em 0;
+}
+
+.div-uplaoded-doc span {
+    color: white;
+}
+
+.div-uplaoded-doc i {
+    cursor: pointer;
+    font-size: 12px;
+    padding-left: 5px;
+    text-align: right;
+    float: right;
+    position: relative;
+    bottom: 15px;
+}
+
+#uploaded-files {
+    clear: both;
+    width: 100%;
+    margin-top: 1.5em;
+}
+
+.file-name {
+    display: block;
+    width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

@@ -55,6 +55,10 @@ ul.ul {
 	padding-inline-start: 40px;
 }
 
+.hidden {
+    display: none;
+}
+
 
 
 

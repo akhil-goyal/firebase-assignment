@@ -1,0 +1,73 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Tech Talks</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bb1feba9b1.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <main>
+        <div class="grid grid-cols-4">
+            <div class="height-100 menu-options">
+                <div class="profile-pic pad-top-4 text-center">
+                    <img alt="User Pic" src="../resources/images/user_avatar_white.png" id="profile-image1">
+                    <input id="profile-image-upload" type="file" onchange="previewFile()">
+                    <div class="plain-text"> </div>
+                    <span id="profile-photo-span" class="profile-photo-span color-white">Upload Profile Photo Here
+                        <br />(optional)</span>
+                </div>
+                <nav class="text-center pad-top-4 nav-options">
+                    <ul>
+                        <li class="active-option"><a href="">Create New Thread</a></li>
+                        <li><a href="">Threads</a></li>
+                        <li><a href="">Settings</a></li>
+                        <li><a href="">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="grid-span-8 text-left thread-control">
+                <div class="new-thread-box">
+                    <h2 class="pad-top-1">Create Thread</h2>
+                    <form class="text-left pad-top-2">
+                        <div>
+                            <label for="thread-title" class="label-form"><b>Title</b></label>
+                            <input type="text" id="thread-title">
+                        </div>
+                        <div>
+                            <label for="thread-title" class="label-form"><b>Description</b></label>
+                            <textarea name="" id="" cols="30" rows="20"></textarea>
+                        </div>
+                        <div class="fileUpload mar-top-1">
+                            <input type="file" id="actual-btn" multiple hidden />
+
+                            <label for="actual-btn"><i class="fas fa-paperclip"></i></label>
+                            <div id="uploaded-files" class="hidden">
+                                <span class="div-uplaoded-doc" id="file-chosen">
+                                    <span>No file chosen</span>
+                                    <i class="fas fa-times"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <button>Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="../js/index.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+
+</html>
