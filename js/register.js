@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     
     const db = firebase.firestore();
-    const form = document.querySelector(".register-form");
+    const form = document.getElementById("register-form");
     const fullName = document.getElementById("fullName");
     const email = document.getElementById("email");
     const password = document.getElementById("password");
@@ -36,7 +36,5 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.log("Error adding document", error);
             });      
     }
-
-    
 
 });

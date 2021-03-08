@@ -1,3 +1,33 @@
+document.addEventListener("DOMContentLoaded", function () {
+
+    const db = firebase.firestore();
+    const loginForm = document.getElementById("login-form");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+
+    if(loginForm) {
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+        
+            firebase
+            .auth()
+            .signInWithEmailAndPassword(email.value, password.value)
+            .then((userCredential) => {
+                // Signed in
+                var user = userCredential.user;
+                
+                window.location = "dashboard.html";
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                console.log(errorMessage);
+            });
+        });
+    }
+
+});
+
 function facebookLogin() {
 
     event.preventDefault();
@@ -50,7 +80,7 @@ function googleLogin() {
         var user = result.user;
 
         window.location = "dashboard.html";
-        
+
     }).catch((error) => {
         // Handle Errors here.
         var errorCode = error.code;
@@ -62,5 +92,20 @@ function googleLogin() {
 
         console.log(error);
         // ...
+    });
+}
+
+function logout() {
+
+    event.preventDefault();
+
+    firebase.auth().signOut().then(() => {
+
+        window.location = "login.html";
+
+    }).catch((error) => {
+
+        console.log(error.message);
+
     });
 }

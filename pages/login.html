@@ -37,16 +37,16 @@
     <main>
         <section class="register-section">
             <div class="smallContainer text-center">
-                <form method="POST" autocomplete="off" class="register-form shadow">
+                <form method="POST" autocomplete="off" class="register-form shadow" id="login-form">
                     <div class="plain-text">
                         <h1 class="font-40 pad-bottom-10">Log In</h1>
                         <span>New Member? <a class="primary-color" href="../pages/register.html">Sign Up</a></span>
                     </div>
                     <div>
-                        <input type="email" required placeholder="Email Address">
+                        <input type="email" required placeholder="Email Address" id="email">
                     </div>
                     <div>
-                        <input type="password" required placeholder="Password">
+                        <input type="password" required placeholder="Password" id="password">
                     </div>
                     <div class="pad-top-5">
                         <a class="primary-color" href="#">Forgot Password?</a>
@@ -101,7 +101,6 @@
 
     <script src="../js/firebase.js"></script>
     <script src="../js/auth.js"></script>
-    <script src="../js/register.js"></script>
 
 </body>
 
