@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
             .createUserWithEmailAndPassword(email.value, password.value)
             .then(function (data) {
               const user = firebase.auth().currentUser;
-              console.log(user);
               addUser(user.uid, fullName.value);
             })
             .catch((error) => console.log("error", error));

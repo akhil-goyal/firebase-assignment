@@ -66,10 +66,12 @@
                     </div>
                     <div>
                         <div class="grid grid-cols-2 grid-space social-buttons pad-top-10">
-                            <a class="primary-color text-right font-50" href="#"><img
-                                    src="../resources/images/facebook.svg" alt="" /></a>
-                            <a class="primary-color text-left font-50" href="#"><img
-                                    src="../resources/images/google.svg" alt="" /></a>
+                            <a class="primary-color text-right font-50" href="#" onclick="facebookLogin();">
+                                <img src="../resources/images/facebook.svg" alt="" />
+                            </a>
+                            <a class="primary-color text-left font-50" href="#" onclick="googleLogin();">
+                                <img src="../resources/images/google.svg" alt="" />
+                            </a>
                         </div>
                     </div>
                 </form>
@@ -107,6 +109,7 @@
 
     <script src="../js/firebase.js"></script>
     <script src="../js/index.js"></script>
+    <script src="../js/auth.js"></script>
     <script src="../js/register.js"></script>
 </body>
 

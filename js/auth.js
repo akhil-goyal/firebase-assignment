@@ -16,16 +16,7 @@ function facebookLogin() {
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var accessToken = credential.accessToken;
 
-        console.log(result);
-
-        // if this is new user
-        if(result.additionalUserInfo.isNewUser) {
-            addUser(user.uid, user.displayName);
-        }
-        
-        // call adduser func
-
-        // ...
+        window.location = "dashboard.html";
     })
     .catch((error) => {
         // Handle Errors here.
@@ -58,8 +49,8 @@ function googleLogin() {
         // The signed-in user info.
         var user = result.user;
 
-        console.log(result);
-        // ...
+        window.location = "dashboard.html";
+        
     }).catch((error) => {
         // Handle Errors here.
         var errorCode = error.code;
