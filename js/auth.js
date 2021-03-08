@@ -12,11 +12,18 @@ function facebookLogin() {
 
         // The signed-in user info.
         var user = result.user;
-        console.log(user);
+        
         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
         var accessToken = credential.accessToken;
 
         console.log(result);
+
+        // if this is new user
+        if(result.additionalUserInfo.isNewUser) {
+            addUser(user.uid, user.displayName);
+        }
+        
+        // call adduser func
 
         // ...
     })
