@@ -1,11 +1,18 @@
+//This function will redirect user to dashboard if already authenticated
 function redirectIfLoggedIn() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            window.location = "dashboard.html";
+            
+            // using timeout to allow addUser function to enter user info in firestore before redirect
+            setTimeout(function(){ 
+                window.location = "dashboard.html";
+             }, 100); 
+             
         }
     });
 }
 
+// This function will redirect user to dashboard if already authenticated
 function redirectIfNotLoggedIn() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (!user) {

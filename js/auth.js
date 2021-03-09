@@ -1,22 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    // get all elements
     const db = firebase.firestore();
     const loginForm = document.getElementById("login-form");
     const email = document.getElementById("email");
     const password = document.getElementById("password");
 
+    // if it is login page then validate user on submit
     if(loginForm) {
         loginForm.addEventListener("submit", function (event) {
             event.preventDefault();
-        
+    
+            // user auth with email and password
             firebase
             .auth()
             .signInWithEmailAndPassword(email.value, password.value)
             .then((userCredential) => {
                 // Signed in
                 var user = userCredential.user;
-                
-                window.location = "dashboard.html";
+                if(user) {
+                    window.location = "dashboard.html";
+                }
             })
             .catch((error) => {
                 var errorCode = error.code;
@@ -28,11 +32,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
+// login with facebook
 function facebookLogin() {
 
     event.preventDefault();
+
+    // get facebook auth provider
     var provider = new firebase.auth.FacebookAuthProvider();
 
+    // do auth using provider
     firebase
     .auth()
     .signInWithPopup(provider)
@@ -62,11 +70,15 @@ function facebookLogin() {
     });
 }
 
+// login with google
 function googleLogin() {
 
     event.preventDefault();
+
+    // get google auth provider
     var provider = new firebase.auth.GoogleAuthProvider();
 
+    // do auth using provider
     firebase
     .auth()
     .signInWithPopup(provider)
@@ -95,12 +107,14 @@ function googleLogin() {
     });
 }
 
+// logout user from the site
 function logout() {
 
     event.preventDefault();
 
     firebase.auth().signOut().then(() => {
 
+        // redirect to login page
         window.location = "login.html";
 
     }).catch((error) => {
