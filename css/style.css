@@ -146,6 +146,16 @@
   } 
 } 
 
+.error {
+    margin: 10px 22px;
+    font-size: 1em;
+    vertical-align: middle;
+    color: #D8000C;
+    background-color: #FFD2D2;
+    padding: 10px;
+    display: none;
+}
+
 
 
 /*Footer*/

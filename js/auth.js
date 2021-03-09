@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const db = firebase.firestore();
     const loginForm = document.getElementById("login-form");
     const email = document.getElementById("email");
-    const password = document.getElementById("password");
+    const password = document.getElementById("password");    
 
     // if it is login page then validate user on submit
     if(loginForm) {
@@ -25,7 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                console.log(errorMessage);
+                
+                // display error
+                document.querySelector(".error").innerHTML = errorMessage;
+                document.querySelector(".error").style.display = 'block';
+
             });
         });
     }
@@ -65,8 +69,9 @@ function facebookLogin() {
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
 
-        console.log(error);
-        // ...
+        // display error
+        document.querySelector(".error").innerHTML = errorMessage;
+        document.querySelector(".error").style.display = 'block';   
     });
 }
 
@@ -102,8 +107,9 @@ function googleLogin() {
         // The firebase.auth.AuthCredential type that was used.
         var credential = error.credential;
 
-        console.log(error);
-        // ...
+        // display error
+        document.querySelector(".error").innerHTML = errorMessage;
+        document.querySelector(".error").style.display = 'block';
     });
 }
 
