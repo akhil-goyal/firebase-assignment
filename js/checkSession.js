@@ -6,8 +6,8 @@ function redirectIfLoggedIn() {
             // using timeout to allow addUser function to enter user info in firestore before redirect
             setTimeout(function(){ 
                 window.location = "dashboard.html";
-             }, 100); 
-             
+             }, 200); 
+
         }
     });
 }
