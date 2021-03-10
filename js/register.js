@@ -57,6 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     // get user object
                     const user = firebase.auth().currentUser;
 
+                    const userData = {
+                        userName : fullName.value,
+                        userImage: uploadedFileName
+                    }
+
+                    localStorage.setItem('userData', JSON.stringify(userData));
+
                     // add user in firesore
                     addUser(user.uid, fullName.value, uploadedFileName);
                 })

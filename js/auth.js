@@ -118,6 +118,8 @@ function logout() {
 
     event.preventDefault();
 
+    localStorage.removeItem('userData');
+
     firebase.auth().signOut().then(() => {
 
         // redirect to login page
