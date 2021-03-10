@@ -14,10 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // create global file var
     let files = [];
-    let fileName = "";
-    let fileExt = "";
 
-    let fileNames=[];
+    let fileNames = [];
 
     userName.innerHTML = `Welcome, ${user.userName}`;
 
@@ -56,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 uploadedFileName = `${imageId}.${file.fileExtension}`;
 
                 fileNames.push(uploadedFileName);
-                
+
                 // get image ref from storage
                 const storageRef = firebase.storage().ref(`images/${uploadedFileName}`);
 
@@ -80,6 +78,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 })
                 .then(function () {
+
+                    threadTitle.value = '';
+                    threadDesc.value = '';
+                    files = [];
                     alert('Thread created successfully!');
                     // redirect to dashboard
                     // window.location = "dashboard.html";

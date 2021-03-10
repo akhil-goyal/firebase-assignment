@@ -5,6 +5,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const userName = document.querySelector('.user-name');
     const userImage = document.querySelector('#profile-image1');
 
+    let threadDate = document.querySelector('.time-bar');
+    let threadTitle = document.querySelector('.thread-title-dashboard');
+    let threadDesc = document.querySelector('.thread-desc-dashboard');
+    let attachmentsArea = document.querySelector('.thread-attachments');
+
+    let attachmentImage = document.querySelector('.image-attachment');
+
+    const db = firebase.firestore();
+
     const user = JSON.parse(localStorage.getItem('userData'));
 
     console.log('DASHBOARD : ', user);
@@ -28,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch((error) => console.log("error", error));
 
     const spanElement = (elem) => {
-        console.log('elem', elem);
+
         let span = document.createElement(`span`)
         span.classList.add(`div-uplaoded-doc`)
         span.setAttribute(`id`, `file-chosen`)
@@ -47,8 +56,50 @@ document.addEventListener('DOMContentLoaded', () => {
         span.appendChild(nested_span)
         span.appendChild(nested_i)
 
-        return span
+        return span;
     }
+
+
+    db
+        .collection("threads")
+        .orderBy("timestamp", "asc")
+        .onSnapshot(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+
+                threadTitle.innerHTML = doc.data().thread_title
+                threadDesc.innerHTML = doc.data().thread_description
+                threadDate.innerHTML = doc.data().timestamp.toDate().toDateString();
+
+
+                // attachmentsArea.appendChild(attachment);
+
+                listRef
+                    .listAll()
+                    .then(function (res) {
+                        res.items.forEach(function (itemRef) {
+                            itemRef
+                                .getDownloadURL()
+                                .then(function (downloadURL) {
+                                    doc.data().thread_attachments.map(img => {
+                                        if (downloadURL.includes(img)) {
+
+                                            attachmentImage.src = downloadURL
+                                            
+                                        }
+                                        
+                                    })
+                                    
+
+                                })
+                                .catch((error) => console.log("error", error));
+                                
+                        });
+                        
+                    })
+                    .catch((error) => console.log("error", error));
+
+            });
+        });
 
     // actualBtn.addEventListener('change', function () {
     //     fileChosen.innerHTML = ''
