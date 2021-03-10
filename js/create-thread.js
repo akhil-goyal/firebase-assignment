@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    console.log('DASHBOARD', localStorage.getItem('userData'));
-
-    // const actualBtn = document.getElementById('actual-btn');
-    // const fileChosen = document.getElementById('uploaded-files');
+    const actualBtn = document.getElementById('actual-btn');
+    const fileChosen = document.getElementById('uploaded-files');
     const userName = document.querySelector('.user-name');
     const userImage = document.querySelector('#profile-image1');
 
@@ -50,13 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return span
     }
 
-    // actualBtn.addEventListener('change', function () {
-    //     fileChosen.innerHTML = ''
-    //     for (var i = 0; i < this.files.length; i++) {
-    //         fileChosen.appendChild(spanElement(this.files[i]))
-    //     }
-    //     fileChosen.classList.remove(`hidden`)
+    actualBtn.addEventListener('change', function () {
+        fileChosen.innerHTML = ''
+        for (var i = 0; i < this.files.length; i++) {
+            fileChosen.appendChild(spanElement(this.files[i]))
+        }
+        fileChosen.classList.remove(`hidden`)
 
-    // })
+    })
 
 })

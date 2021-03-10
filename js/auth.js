@@ -118,9 +118,9 @@ function logout() {
 
     event.preventDefault();
 
-    localStorage.removeItem('userData');
-
     firebase.auth().signOut().then(() => {
+
+        localStorage.clear();
 
         // redirect to login page
         window.location = "login.html";

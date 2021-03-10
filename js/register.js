@@ -57,15 +57,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     // get user object
                     const user = firebase.auth().currentUser;
 
+                    // add user in firesore
+                    addUser(user.uid, fullName.value, uploadedFileName);
+
                     const userData = {
-                        userName : fullName.value,
+                        userName: fullName.value,
                         userImage: uploadedFileName
                     }
 
                     localStorage.setItem('userData', JSON.stringify(userData));
-
-                    // add user in firesore
-                    addUser(user.uid, fullName.value, uploadedFileName);
                 })
                 .catch((error) => console.log("error", error));
         }
