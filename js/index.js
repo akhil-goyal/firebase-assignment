@@ -1,4 +1,5 @@
 function previewFile() {
+
     let preview = document.querySelector('img');
     let file = document.querySelector('input[type=file]').files[0];
     let reader = new FileReader();
@@ -12,6 +13,7 @@ function previewFile() {
         reader.readAsDataURL(file);
     }
 }
+
 document.getElementById(`profile-image1`).addEventListener(`click`, () => {
     document.getElementById(`profile-image-upload`).click()
 })
