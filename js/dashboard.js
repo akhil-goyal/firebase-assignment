@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    console.log('DASHBOARD', localStorage.getItem('userData'));
-
     // const actualBtn = document.getElementById('actual-btn');
     // const fileChosen = document.getElementById('uploaded-files');
     const userName = document.querySelector('.user-name');
     const userImage = document.querySelector('#profile-image1');
 
     const user = JSON.parse(localStorage.getItem('userData'));
+
+    console.log('DASHBOARD : ', user);
 
     userName.innerHTML = `Welcome, ${user.userName}`;
 

@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const user = firebase.auth().currentUser;
 
                     // add user in firesore
-                    addUser(user.uid, fullName.value, uploadedFileName);
+                    addUser(user.uid, fullName.value, email.value, uploadedFileName);
 
                     const userData = {
                         userName: fullName.value,
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // func to add user in firestore 
-    function addUser(userId, fullName, uploadedFileName) {
+    function addUser(userId, fullName, email, uploadedFileName) {
 
         // create user doc using user id provided by auth
         db.collection("Users")
@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .set({
                 full_name: fullName,
                 user_id: userId,
+                email_address: email,
                 profile_image: uploadedFileName,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             })

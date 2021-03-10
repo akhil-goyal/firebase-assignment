@@ -34,30 +34,44 @@
                     </ul>
                 </nav>
             </div>
+
             <div class="grid-span-8 text-left thread-control">
+
                 <div class="new-thread-box">
+
                     <h2 class="pad-top-1">Create Thread</h2>
-                    <form class="text-left pad-top-2">
+
+                    <form class="create-thread-form text-left pad-top-2">
+
                         <div>
                             <label for="thread-title" class="label-form"><b>Title</b></label>
                             <input type="text" id="thread-title">
                         </div>
+
                         <div>
-                            <label for="thread-title" class="label-form"><b>Description</b></label>
-                            <textarea name="" id="" cols="30" rows="20"></textarea>
+                            <label for="thread-description" class="label-form"><b>Description</b></label>
+                            <textarea name="" id="thread-description" cols="30" rows="20"></textarea>
                         </div>
+
                         <div class="fileUpload mar-top-1">
+
                             <input type="file" id="actual-btn" multiple hidden />
 
                             <label for="actual-btn"><i class="fas fa-paperclip"></i></label>
+
                             <div id="uploaded-files" class="hidden">
+
                                 <span class="div-uplaoded-doc" id="file-chosen">
                                     <span>No file chosen</span>
                                     <i class="fas fa-times"></i>
                                 </span>
+                                
                             </div>
+
                         </div>
+
                         <button>Submit</button>
+
                     </form>
                 </div>
             </div>

@@ -15,6 +15,7 @@ function redirectIfLoggedIn() {
 // This function will redirect user to dashboard if already authenticated
 function redirectIfNotLoggedIn() {
     firebase.auth().onAuthStateChanged(function (user) {
+
         if (!user) {
             window.location = "login.html";
         }

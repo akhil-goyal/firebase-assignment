@@ -8,19 +8,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // if it is login page then validate user on submit
     if (loginForm) {
+
         loginForm.addEventListener("submit", function (event) {
             event.preventDefault();
 
-            // user auth with email and password
             firebase
                 .auth()
                 .signInWithEmailAndPassword(email.value, password.value)
-                .then((userCredential) => {
-                    // Signed in
-                    var user = userCredential.user;
+                .then(function () {
+
+                    const user = firebase.auth().currentUser;
+
                     if (user) {
-                        window.location = "dashboard.html";
+
+                        db.collection("Users")
+                            .doc(user.uid)
+                            .get()
+                            .then(function (doc) {
+                                if (doc.exists) {
+
+                                    const userData = {
+                                        userName: doc.data().full_name,
+                                        userImage: doc.data().profile_image
+                                    }
+
+                                    localStorage.clear();
+
+                                    localStorage.setItem('userData', JSON.stringify(userData));
+
+                                    window.location = "dashboard.html";
+
+                                } else {
+                                    console.log("No such document");
+                                }
+                            });
                     }
+
                 })
                 .catch((error) => {
                     var errorCode = error.code;
@@ -31,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.querySelector(".error").style.display = 'block';
 
                 });
+
         });
     }
 
