@@ -1,3 +1,5 @@
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // const actualBtn = document.getElementById('actual-btn');
@@ -25,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const listRef = firebase.storage().ref("images");
 
 
-
     const CreateThreadElements = (images) => {
         let dummyValues = ``
         if (images.length > 0)
@@ -34,12 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    const postComment = (threadId) => {
-
-        const comment = document.getElementById(`post-comment-${threadId}`);
-
-        alert(comment);
-    }
 
     const commentsSection = (comments) => {
         let dummyValues = ``
@@ -104,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     <p>Add comment:</p>
                                                     <div class="flex comment-input">
                                                         <input id="post-comment-${doc.id}" class="post-comment" type="text">
-                                                        <button onclick="postComment(${doc.id})" type="submit" class="post-button">Post</button>
+                                                        <button onclick="postComment('${doc.id}')" type="submit" class="post-button">Post</button>
                                                     </div>
                                                 </div>
                             
@@ -124,3 +119,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
 })
+
+let postComment = (threadId) => {
+    const comment = document.getElementById(`post-comment-${threadId}`);
+    alert(comment.value);
+}
+
