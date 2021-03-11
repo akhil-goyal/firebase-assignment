@@ -32,11 +32,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    const timeStamp = (datevalue) => {
+        const _timeStmp = new Date(datevalue).getTime()
+        const newDate = new Date(_timeStmp * 1000)
+        const Hours = newDate.getHours()
+        const Minutes = newDate.getMinutes()
+        return (Hours < 10 ? '0' + Hours : Hours) + ':' + (Minutes < 10 ? '0' + Minutes : Minutes)
+    }
+
+
 
     const commentsSection = (userName, Comment, Time) => {
+        const getTime = timeStamp(Time)
         return `<div class="comment">
                     <div class="flex">
-                        <p class="name-bar width-100"><b>${userName}</b><span class="time-bar float-right span-time flex-auto">${Time.toDate().toDateString()}</span></p>
+                        <p class="name-bar width-100"><b>${userName}</b><span class="time-bar-comments float-right span-time flex-auto">${Time.toDateString()} ${getTime}</span></p>
                         
                     </div>
                     <p class="user-comment">${Comment}</p>
@@ -54,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 commentCount.innerHTML = `${querySnapshot.size} comment(s)`
                 querySnapshot.forEach((doc) => {
                     commentBox.innerHTML +=
-                        commentsSection(doc.data().user_name, doc.data().comment, doc.data().timestamp)
+                        commentsSection(doc.data().user_name, doc.data().comment, doc.data().timestamp.toDate())
                 })
             })
 
@@ -86,6 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
             querySnapshot.forEach((doc) => {
                 const thread_elements = CreateThreadElements(doc.data().thread_attachments)
                 fetchComments(doc.id)
+                const _timeStamp = timeStamp(doc.data().timestamp.toDate())
                 const _commentCount = 0
                 threadContainer.innerHTML += `
                                             <div class="thread thread-shadow">
@@ -94,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 <img src="../resources/images/user_avatar.png" class="thread-image" width="20" alt="">
                                                 <i class="fas fa-circle online-user"></i>
                                                 <p class="name-bar"><b>${doc.data().user_name}</b></p>
-                                                <b class="time-bar text-right flex-auto">${doc.data().timestamp.toDate().toDateString()}</b>
+                                                <b class="time-bar text-right flex-auto">${doc.data().timestamp.toDate().toDateString()} ${_timeStamp}</b>
                                             </div>
                             
                                             <div class="thread-content">

@@ -69,6 +69,10 @@
     color: var(--primary-color);
 }
 
+.width-30 {
+    width: 40vh;
+}
+
 /*------- Grid css -------*/
 
 .grid {

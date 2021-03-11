@@ -4,6 +4,18 @@
     border-right: 1px solid var(--background-color);
     height: 100vh;
     position: fixed;
+    z-index: 999;
+}
+
+.time-bar {
+    padding-top: 12px;
+    color: var(--website-color);
+}
+
+.time-bar-comments {
+    padding-top: 5px;
+    padding-right: 10px;
+    color: var(--website-color);
 }
 
 .thread-control {
@@ -262,7 +274,7 @@ footer {
 
 .comment-user-image {
     height: 20px;
-    width: 20px;    
+    width: 20px;
     position: relative;
     top: 9px;
 }
@@ -270,7 +282,6 @@ footer {
 .comment:not(:last-child) {
     padding-bottom: 0.5em;
     border-bottom: 1px dotted var(--background-color);
-
 }
 
 .add-comment {
@@ -310,6 +321,7 @@ footer {
     border: 1px solid var(--website-color);
     color: var(--secondary-color);
 }
+
 .post-button:hover {
     background-color: var(--secondary-color);
     border: 1px solid var(--background-color);
