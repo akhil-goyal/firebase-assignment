@@ -49,11 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .collection("comments").where("thread_id", "==", threadId)
             .onSnapshot((querySnapshot) => {
                 const commentBox = document.getElementById(`thread-${threadId}`)
+                const commentCount = document.getElementById(`commentCount-${threadId}`)
                 commentBox.innerHTML = ``
+                commentCount.innerHTML = querySnapshot.size
                 querySnapshot.forEach((doc) => {
                     commentBox.innerHTML +=
                         commentsSection(doc.data().user_name, doc.data().comment, doc.data().timestamp)
-
                 })
             })
 
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                 </div>
                             
                                                 <div>
-                                                    <p class="text-right color-website"><b>${_commentCount} Comments</b></p>
+                                                    <p class="text-right color-website"><b id="commentCount-${doc.id}">${_commentCount} Comments</b></p>
                                                 </div>
                             
                                             </div>
