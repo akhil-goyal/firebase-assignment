@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const storageRef = firebase.storage().ref(`images/${uploadedFileName}`);
 
                 // upload image
-                const uploadTask = storageRef.put(file, metadata);
+                const uploadTask = storageRef.put(file.fileData, metadata);
 
                 uploadTask.on(
                     "state_changed",
