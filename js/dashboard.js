@@ -44,13 +44,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const fetchComments = (threadId) => {
-        document.getElementById(`thread-${threadId}`).innerHTML = ``
         let commentsArray = [];
         db
             .collection("comments").where("thread_id", "==", threadId)
             .onSnapshot((querySnapshot) => {
+                const commentBox = document.getElementById(`thread-${threadId}`)
+                commentBox.innerHTML = ``
                 querySnapshot.forEach((doc) => {
-                    document.getElementById(`thread-${threadId}`).innerHTML +=
+                    commentBox.innerHTML +=
                         commentsSection(doc.data().user_name, doc.data().comment, doc.data().timestamp)
 
                 })
