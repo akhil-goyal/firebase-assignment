@@ -8,7 +8,7 @@
 }
 
 .time-bar {
-    padding-top: 12px;
+    padding-top: 10px;
     color: var(--website-color);
 }
 
@@ -242,7 +242,7 @@ footer {
 .thread {
     padding: 2em 3em;
     border: 1px solid #c2c2c2;
-    width: 60%;
+    width: 90%;
     margin-left: 2em;
     margin-bottom: 2em;
 }
