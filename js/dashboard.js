@@ -1,4 +1,5 @@
-
+const user = JSON.parse(localStorage.getItem('userData'));
+const db = firebase.firestore();
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -15,10 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let authorAvatar = document.querySelector('.thread-image');
 
     let attachmentImage = document.querySelector('.image-attachment');
-
-    const db = firebase.firestore();
-
-    const user = JSON.parse(localStorage.getItem('userData'));
 
     console.log('DASHBOARD : ', user);
 
@@ -49,6 +46,36 @@ document.addEventListener('DOMContentLoaded', () => {
         return dummyValues
     }
 
+    const fetchComments = (threadId) => {
+
+        let commentsArray = [];
+
+        db
+            .collection("comments")
+            .orderBy("timestamp", "desc")
+            .onSnapshot((querySnapshot) => {
+
+
+                querySnapshot.forEach((doc) => {
+                    
+                    if(doc.data().thread_id === threadId){
+                        
+                        commentsArray.push({
+                            "user_name" : doc.data().user_name,
+                            "user_comment" : doc.data().comment,
+                            "comment_time": doc.data().timestamp,
+                        });
+                        
+                    }
+
+                })
+
+
+            })
+
+            return commentsArray;
+    }
+
     listRef
         .listAll()
         .then(function (res) {
@@ -74,7 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
             querySnapshot.forEach((doc) => {
                 const thread_elements = CreateThreadElements(doc.data().thread_attachments)
                 //Need to find comments from comment table
-                const _comments = commentsSection()
+
+
+
+                const _comments = commentsSection(fetchComments(doc.id))
                 const _commentCount = 0
                 threadContainer.innerHTML += `
                                             <div class="thread shadow">
@@ -120,8 +150,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 })
 
-let postComment = (threadId) => {
+const postComment = (threadId) => {
+
     const comment = document.getElementById(`post-comment-${threadId}`);
-    alert(comment.value);
+
+    const userName = user.userName;
+
+    db.collection("comments")
+        .doc(user.uid)
+        .set({
+            comment: comment.value,
+            thread_id: threadId,
+            user_name: userName,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(() => {
+            alert('Comment Posted!');
+        })
+        .catch((err) => console.log("err", err));
 }
 
