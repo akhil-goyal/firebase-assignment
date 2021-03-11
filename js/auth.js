@@ -138,19 +138,13 @@ function googleLogin() {
 
 // logout user from the site
 function logout() {
+    firebase
+        .auth()
+        .signOut()
+        .then(() => {
+            localStorage.clear();
+            console.log('Local storage cleared.');
+        });
 
-    event.preventDefault();
-
-    firebase.auth().signOut().then(() => {
-
-        localStorage.clear();
-
-        // redirect to login page
-        window.location = "login.html";
-
-    }).catch((error) => {
-
-        console.log(error.message);
-
-    });
+    window.location = "login.html";
 }

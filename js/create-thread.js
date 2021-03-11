@@ -17,8 +17,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // create global file var
     let files = [];
 
-    userName.innerHTML = `Welcome, ${user.userName}`;
-    userImage.src = user.userImage;
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            getUser(user.uid);
+        } else {
+            console.log('User is not authenticated.');
+        }
+    });
+
+    getUser = (uid) => {
+        db.collection("Users")
+            .doc(uid)
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    userName.innerHTML = `Welcome, ${doc.data().full_name}`;
+                    userImage.src = doc.data().profile_image;
+                } else {
+                    console.log("No such document");
+                }
+            });
+    }
 
     threadForm.addEventListener('submit', (event) => {
 
