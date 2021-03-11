@@ -29,7 +29,7 @@ h1,h2,h3,h4,h5,h6,a,p,span {
     color: var(--background-color);
 }
 
-a {
+a:not(.thread-desc-dashboard) {
     text-decoration: none; 
     color: var(--background-color);  
 }
@@ -40,13 +40,13 @@ img {
 	vertical-align: bottom;
 }
 
-ul {
+ul:not(.thread-desc-dashboard) {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-ul.ul {
+ul.ul:not(.thread-desc-dashboard) {
 	list-style-type: disc;
 	margin-block-start: 1em;
 	margin-block-end: 1em;
