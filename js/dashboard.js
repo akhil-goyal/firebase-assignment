@@ -44,9 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const fetchComments = (threadId) => {
-
+        document.getElementById(`thread-${threadId}`).innerHTML = ``
         let commentsArray = [];
-
         db
             .collection("comments").where("thread_id", "==", threadId)
             .onSnapshot((querySnapshot) => {
@@ -55,8 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         commentsSection(doc.data().user_name, doc.data().comment, doc.data().timestamp)
 
                 })
-
-
             })
 
         return commentsArray;
