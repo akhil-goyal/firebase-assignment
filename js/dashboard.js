@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let attachmentImage = document.querySelector('.image-attachment');
 
-    let postCommentButtons = document.querySelectorAll('.post-button');
-
     const db = firebase.firestore();
 
     const user = JSON.parse(localStorage.getItem('userData'));
@@ -36,21 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    const postComment = (event) => {
-
-
-        event.preventDefault();
-
-        const threadId = event.target.id;
+    const postComment = (threadId) => {
 
         const comment = document.getElementById(`post-comment-${threadId}`);
 
         alert(comment);
     }
-
-    postCommentButtons.forEach(commentBtn =>
-        box.addEventListener(`click`, postComment)
-    )
 
     const commentsSection = (comments) => {
         let dummyValues = ``
@@ -115,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                                     <p>Add comment:</p>
                                                     <div class="flex comment-input">
                                                         <input id="post-comment-${doc.id}" class="post-comment" type="text">
-                                                        <button id="${doc.id}" type="submit" class="post-button">Post</button>
+                                                        <button onclick="postComment(${doc.id})" type="submit" class="post-button">Post</button>
                                                     </div>
                                                 </div>
                             
