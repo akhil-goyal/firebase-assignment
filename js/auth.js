@@ -27,14 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             .then(function (doc) {
                                 if (doc.exists) {
 
-                                    // const userData = {
-                                    //     userName: doc.data().full_name,
-                                    //     userImage: doc.data().profile_image,
-                                    //     userEmail: doc.data().email_address
-                                    // }
-
-                                    // localStorage.setItem('userData', JSON.stringify(userData));
-
                                     window.location = "dashboard.html";
 
                                 } else {
@@ -142,7 +134,6 @@ function logout() {
         .auth()
         .signOut()
         .then(() => {
-            // localStorage.clear();
             console.log('Local storage cleared.');
         });
 

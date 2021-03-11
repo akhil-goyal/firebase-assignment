@@ -1,3 +1,5 @@
+let loggedInUser;
+
 document.addEventListener('DOMContentLoaded', () => {
 
     const actualBtn = document.getElementById('actual-btn');
@@ -10,16 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const db = firebase.firestore();
 
-    const user = JSON.parse(localStorage.getItem('userData'));
-
-    console.log('USER : ', user);
-
     // create global file var
     let files = [];
 
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            getUser(user.uid);
+    firebase.auth().onAuthStateChanged((currentUser) => {
+        if (currentUser) {
+            getUser(currentUser.uid);
         } else {
             console.log('User is not authenticated.');
         }
@@ -31,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .get()
             .then((doc) => {
                 if (doc.exists) {
+                    loggedInUser = doc.data();
                     userName.innerHTML = `Welcome, ${doc.data().full_name}`;
                     userImage.src = doc.data().profile_image;
                 } else {
@@ -89,14 +88,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const addThread = (fileNames) => {
 
         db.collection("threads")
-            .doc(user.uid)
+            .doc(loggedInUser.user_id)
             .set({
                 thread_title: threadTitle.value,
                 thread_description: threadDesc.value,
                 thread_attachments: fileNames,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                user_name: user.userName,
-                user_email: user.userEmail
+                user_name: loggedInUser.user_name,
+                user_email: loggedInUser.email_address
             })
             .then(function () {
 
