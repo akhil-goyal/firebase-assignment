@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let attachmentImage = document.querySelector('.image-attachment');
 
-    let comment = document.querySelector('.post-comment');
-    let postComment = document.querySelector('.post-button');
+    let postCommentButtons = document.querySelectorAll('.post-button');
 
     const db = firebase.firestore();
 
@@ -37,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    postComment.addEventListener('submit', (event) => {
+    const postComment = (event) => {
+
 
         event.preventDefault();
 
@@ -46,8 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const comment = document.getElementById(`post-comment-${threadId}`);
 
         alert(comment);
+    }
 
-    })
+    postCommentButtons.forEach(commentBtn =>
+        box.addEventListener(`click`, postComment)
+    )
 
     const commentsSection = (comments) => {
         let dummyValues = ``
@@ -130,14 +133,5 @@ document.addEventListener('DOMContentLoaded', () => {
                                             `
             })
         });
-
-
-    // postComment.addEventListener('submit', (event) => {
-
-    //     event.preventDefault();
-
-    //     console.log('COMMENT : ', comment.value);
-
-    // })
 
 })
