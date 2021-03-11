@@ -34,13 +34,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const commentsSection = (userName, Comment, Time) => {
-        debugger
         return `<div class="comment">
-        <div class="flex">
-            <p class="name-bar"><b>${userName}</b></p>
-        </div>
-        <p class="user-comment">${Comment}</p>
-    </div>`;
+                    <div class="flex">
+                        <p class="name-bar width-100"><b>${userName}</b><span class="time-bar float-right span-time flex-auto">${Time.toDate().toDateString()}</span></p>
+                        
+                    </div>
+                    <p class="user-comment">${Comment}</p>
+                </div>`;
     }
 
     const fetchComments = (threadId) => {

@@ -19,7 +19,7 @@
 }
 
 .color-primary {
-   color: #213D96;
+    color: #213D96;
 }
 
 /*------- Generic Css -------*/
@@ -121,7 +121,15 @@
     justify-content: flex-start;
 }
 
+.width-100 {
+    width: 100%;
+}
 
+.span-time {
+    font-size: 10px;
+    color: var(--website-color);
+    font-weight: bold;
+}
 
 /*---------- Error Styling -----------*/
 
@@ -130,21 +138,21 @@
     border: 0;
     border-bottom: 1px solid var(--error-color) !important;
 }
-  
-@keyframes shake{ 
-  0%{ 
-    transform: translateX(0) 
-  } 
-  25%{ 
-    transform: translateX(25px); 
-  }    
-  50%{ 
-    transform: translateX(-25px); 
-  } 
-  100%{ 
-    transform: translateX(0px); 
-  } 
-} 
+
+@keyframes shake {
+    0% {
+        transform: translateX(0)
+    }
+    25% {
+        transform: translateX(25px);
+    }
+    50% {
+        transform: translateX(-25px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
 
 .error {
     margin: 10px 22px;
@@ -156,10 +164,7 @@
     display: none;
 }
 
-
-
 /*Footer*/
-
 
 footer {
     padding: 2em 0;
