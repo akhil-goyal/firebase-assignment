@@ -33,6 +33,31 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<div class="thread-attachments">${dummyValues}</div>`
     }
 
+    const addCommentSection = (canUserComment) => {
+        if (canUserComment) {
+            return `<div class="add-comment">
+                    <p>Add comment:</p>
+                    <div class="flex comment-input">
+                        <input type="text">
+                        <button class="post-button">Post</button>
+                    </div>
+                </div>`
+        }
+    }
+
+    const commentsSection = (comments) => {
+        let dummyValues = ``
+        if (comments.length > 0)
+            images.map((elem) => dummyValues += `<div class="comment">
+                                                    <div class="flex">
+                                                        <p class="name-bar"><b>${elem.user_name}</b></p>
+                                                    </div>
+                                                    <p class="user-comment">${elem.comment}</p>
+                                                </div>`
+            )
+        return dummyValues
+    }
+
     listRef
         .listAll()
         .then(function (res) {
@@ -56,8 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
             threadContainer.innerHTML = ``;
 
             querySnapshot.forEach((doc) => {
-                const thread_elements = CreateThreadElements(doc.data().thread_attachments);
-
+                const thread_elements = CreateThreadElements(doc.data().thread_attachments)
+                const _addCommentSection = addCommentSection(doc.data().can_comment)
+                //Need to find comments from comment table
+                const _comments = commentsSection()
+                const _commentCount = 0
                 threadContainer.innerHTML += `
                                             <div class="thread shadow">
                             
@@ -77,43 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                                 ${thread_elements}
                             
-                                                <div class="add-comment">
-                                                    <p>Add comment:</p>
-                                                    <div class="flex comment-input">
-                                                        <input type="text">
-                                                        <button class="post-button">Post</button>
-                                                    </div>
-                                                </div>
+                                                ${_addCommentSection}
                             
                                                 <div>
-                                                    <p class="text-right color-website"><b>4 Comments</b></p>
+                                                    <p class="text-right color-website"><b>${_commentCount} Comments</b></p>
                                                 </div>
                             
                                             </div>
                             
-                                            <div class="thread-comments">
-                            
-                                                <div class="comment">
-                                                    <div class="flex">
-                                                        <p class="name-bar"><b>Akhil Goyal</b></p>
-                                                    </div>
-                                                    <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                                </div>
-                            
-                                                <div class="comment">
-                                                    <div class="flex">
-                                                        <p class="name-bar"><b>Akhil Goyal</b></p>
-                                                    </div>
-                                                    <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                                </div>
-                            
-                                                <div class="comment">
-                                                    <div class="flex">
-                                                        <p class="name-bar"><b>Akhil Goyal</b></p>
-                                                    </div>
-                                                    <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                                </div>
-                            
+                                            <div class="thread-comments">                            
+                                                ${_comments}                            
                                             </div>
                             
                                         </div>
