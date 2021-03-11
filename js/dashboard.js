@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let attachmentImage = document.querySelector('.image-attachment');
 
+    let comment = document.querySelector('.post-comment');
+    let postComment = document.querySelector('.post-button');
+
     const db = firebase.firestore();
 
     const user = JSON.parse(localStorage.getItem('userData'));
@@ -33,26 +36,27 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<div class="thread-attachments">${dummyValues}</div>`
     }
 
-    const addCommentSection = (canUserComment) => {
-        if (canUserComment) {
-            return `<div class="add-comment">
-                    <p>Add comment:</p>
-                    <div class="flex comment-input">
-                        <input type="text">
-                        <button class="post-button">Post</button>
-                    </div>
-                </div>`
-        }
-    }
+
+    postComment.addEventListener('submit', (event) => {
+
+        event.preventDefault();
+
+        const threadId = event.target.id;
+
+        const comment = document.getElementById(`post-comment-${threadId}`);
+
+        alert(comment);
+
+    })
 
     const commentsSection = (comments) => {
         let dummyValues = ``
-        if (comments.length > 0)
+        if (comments !== undefined && comments.length > 0)
             images.map((elem) => dummyValues += `<div class="comment">
                                                     <div class="flex">
-                                                        <p class="name-bar"><b>${elem.user_name}</b></p>
+                                                        <p class="name-bar"><b></b></p>
                                                     </div>
-                                                    <p class="user-comment">${elem.comment}</p>
+                                                    <p class="user-comment"></p>
                                                 </div>`
             )
         return dummyValues
@@ -75,20 +79,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     db
         .collection("threads")
-        .orderBy("timestamp", "asc")
+        .orderBy("timestamp", "desc")
         .onSnapshot((querySnapshot) => {
 
             threadContainer.innerHTML = ``;
 
             querySnapshot.forEach((doc) => {
                 const thread_elements = CreateThreadElements(doc.data().thread_attachments)
-                const _addCommentSection = addCommentSection(doc.data().can_comment)
                 //Need to find comments from comment table
                 const _comments = commentsSection()
                 const _commentCount = 0
                 threadContainer.innerHTML += `
                                             <div class="thread shadow">
-                            
+
                                             <div class="flex">
                                                 <img src="../resources/images/user_avatar.png" class="thread-image" width="20" alt="">
                                                 <i class="fas fa-circle online-user"></i>
@@ -105,7 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                                 ${thread_elements}
                             
-                                                ${_addCommentSection}
+                                                <div class="add-comment">
+                                                    <p>Add comment:</p>
+                                                    <div class="flex comment-input">
+                                                        <input id="post-comment-${doc.id}" class="post-comment" type="text">
+                                                        <button id="${doc.id}" type="submit" class="post-button">Post</button>
+                                                    </div>
+                                                </div>
                             
                                                 <div>
                                                     <p class="text-right color-website"><b>${_commentCount} Comments</b></p>
@@ -120,5 +129,15 @@ document.addEventListener('DOMContentLoaded', () => {
                                         </div>
                                             `
             })
-        })
+        });
+
+
+    // postComment.addEventListener('submit', (event) => {
+
+    //     event.preventDefault();
+
+    //     console.log('COMMENT : ', comment.value);
+
+    // })
+
 })
