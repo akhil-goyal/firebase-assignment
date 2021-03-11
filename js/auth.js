@@ -32,8 +32,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                         userImage: doc.data().profile_image
                                     }
 
-                                    localStorage.clear();
-
                                     localStorage.setItem('userData', JSON.stringify(userData));
 
                                     window.location = "dashboard.html";

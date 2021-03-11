@@ -5,10 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const userName = document.querySelector('.user-name');
     const userImage = document.querySelector('#profile-image1');
 
+    let threadContainer = document.querySelector('.thread-list');
     let threadDate = document.querySelector('.time-bar');
     let threadTitle = document.querySelector('.thread-title-dashboard');
     let threadDesc = document.querySelector('.thread-desc-dashboard');
-    let attachmentsArea = document.querySelector('.thread-attachments');
+    let threadAuthor = document.querySelector('.name-bar');
+    let authorAvatar = document.querySelector('.thread-image');
 
     let attachmentImage = document.querySelector('.image-attachment');
 
@@ -63,43 +65,251 @@ document.addEventListener('DOMContentLoaded', () => {
     db
         .collection("threads")
         .orderBy("timestamp", "asc")
-        .onSnapshot(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
+        .onSnapshot((querySnapshot) => {
 
-                threadTitle.innerHTML = doc.data().thread_title
-                threadDesc.innerHTML = doc.data().thread_description
-                threadDate.innerHTML = doc.data().timestamp.toDate().toDateString();
+            threadContainer.innerHTML = ``;
 
+            querySnapshot.forEach((doc) => {
 
-                // attachmentsArea.appendChild(attachment);
+                console.log('THREADS DOC : ', doc.data());
 
-                listRef
-                    .listAll()
-                    .then(function (res) {
-                        res.items.forEach(function (itemRef) {
-                            itemRef
-                                .getDownloadURL()
-                                .then(function (downloadURL) {
-                                    doc.data().thread_attachments.map(img => {
-                                        if (downloadURL.includes(img)) {
+                threadContainer.innerHTML += `
+                                            <div class="thread shadow">
+                            
+                                            <div class="flex">
+                                                <img src="../resources/images/user_avatar.png" class="thread-image" width="20" alt="">
+                                                <i class="fas fa-circle online-user"></i>
+                                                <p class="name-bar"><b></b></p>
+                                                <b class="time-bar text-right flex-auto">${doc.data().timestamp.toDate().toDateString()}</b>
+                                            </div>
+                            
+                                            <div class="thread-content">
+                            
+                                                <div class="plain-content">
+                                                    <p class="thread-title-dashboard"><b>${doc.data().thread_title}</b></p>
+                                                    <p class="thread-desc-dashboard"><b>${doc.data().thread_description}</b></p>
+                                                </div>
 
-                                            attachmentImage.src = downloadURL
-                                            
-                                        }
-                                        
-                                    })
-                                    
+                                                <div class="thread-attachments">
+                                                    <img class="image-attachment" src="../resources/images/user_avatar.png" alt="">
+                                                </div>
+                            
+                                                <div class="add-comment">
+                                                    <p>Add comment:</p>
+                                                    <div class="flex comment-input">
+                                                        <input type="text">
+                                                        <button class="post-button">Post</button>
+                                                    </div>
+                                                </div>
+                            
+                                                <div>
+                                                    <p class="text-right color-website"><b>4 Comments</b></p>
+                                                </div>
+                            
+                                            </div>
+                            
+                                            <div class="thread-comments">
+                            
+                                                <div class="comment">
+                                                    <div class="flex">
+                                                        <p class="name-bar"><b>Akhil Goyal</b></p>
+                                                    </div>
+                                                    <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                                                </div>
+                            
+                                                <div class="comment">
+                                                    <div class="flex">
+                                                        <p class="name-bar"><b>Akhil Goyal</b></p>
+                                                    </div>
+                                                    <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                                                </div>
+                            
+                                                <div class="comment">
+                                                    <div class="flex">
+                                                        <p class="name-bar"><b>Akhil Goyal</b></p>
+                                                    </div>
+                                                    <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                                                </div>
+                            
+                                            </div>
+                            
+                                        </div>
+                                            `
+                
 
-                                })
-                                .catch((error) => console.log("error", error));
-                                
-                        });
-                        
-                    })
-                    .catch((error) => console.log("error", error));
+                // db
+                //     .collection('Users')
+                //     .onSnapshot((querySnapshot) => {
+                //         querySnapshot.forEach((userDoc) => {
+                //             if (doc.id === userDoc.id) {
+                //                 threadAuthor.innerHTML = `${userDoc.data().full_name}`;
+                //             }
+                //         })
+                //     })
+
+                // threadTitle.innerHTML = doc.data().thread_title
+                // threadDesc.innerHTML = doc.data().thread_description
+                // threadDate.innerHTML = doc.data().timestamp.toDate().toDateString();
+
+                // listRef
+                //     .listAll()
+                //     .then(function (res) {
+
+                //         console.log('ITEMS : ', res.items);
+
+                //         res.items.forEach(function (itemRef) {
+                //             itemRef
+                //                 .getDownloadURL()
+                //                 .then(function (downloadURL) {
+                //                     doc.data().thread_attachments.map(img => {
+                //                         if (downloadURL.includes(img)) {
+                //                             // attachmentImage.src = downloadURL
+
+                //                             threadContainer.innerHTML += `
+                //                             <div class="thread shadow">
+                            
+                //                             <div class="flex">
+                //                                 <img src="../resources/images/user_avatar.png" class="thread-image" width="20" alt="">
+                //                                 <i class="fas fa-circle online-user"></i>
+                //                                 <p class="name-bar"><b></b></p>
+                //                                 <b class="time-bar text-right flex-auto">${doc.data().timestamp.toDate().toDateString()}</b>
+                //                             </div>
+                            
+                //                             <div class="thread-content">
+                            
+                //                                 <div class="plain-content">
+                //                                     <p class="thread-title-dashboard"><b>${doc.data().thread_title}</b></p>
+                //                                     <p class="thread-desc-dashboard"><b>${doc.data().thread_description}</b></p>
+                //                                 </div>
+                            
+                //                                 <div class="thread-attachments">
+                //                                     <img class="image-attachment" src=${downloadURL} alt="">
+                //                                 </div>
+                            
+                //                                 <div class="add-comment">
+                //                                     <p>Add comment:</p>
+                //                                     <div class="flex comment-input">
+                //                                         <input type="text">
+                //                                         <button class="post-button">Post</button>
+                //                                     </div>
+                //                                 </div>
+                            
+                //                                 <div>
+                //                                     <p class="text-right color-website"><b>4 Comments</b></p>
+                //                                 </div>
+                            
+                //                             </div>
+                            
+                //                             <div class="thread-comments">
+                            
+                //                                 <div class="comment">
+                //                                     <div class="flex">
+                //                                         <p class="name-bar"><b>Akhil Goyal</b></p>
+                //                                     </div>
+                //                                     <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                //                                 </div>
+                            
+                //                                 <div class="comment">
+                //                                     <div class="flex">
+                //                                         <p class="name-bar"><b>Akhil Goyal</b></p>
+                //                                     </div>
+                //                                     <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                //                                 </div>
+                            
+                //                                 <div class="comment">
+                //                                     <div class="flex">
+                //                                         <p class="name-bar"><b>Akhil Goyal</b></p>
+                //                                     </div>
+                //                                     <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+                //                                 </div>
+                            
+                //                             </div>
+                            
+                //                         </div>
+                //                             `
+                //                         }
+                //                     })
+                //                 })
+                //                 .catch((error) => console.log("error", error));
+                //         });
+
+                //     })
+                //     .catch((error) => console.log("error", error));
 
             });
         });
+
+    // db
+    //     .collection("threads")
+    //     .orderBy("timestamp", "asc")
+    //     .onSnapshot((querySnapshot) => {
+    //         querySnapshot.forEach((doc) => {
+
+    //             threadContainer.innerHTML = `
+    //             <div class="thread shadow">
+
+    //             <div class="flex">
+    //                 <img src="../resources/images/user_avatar.png" class="thread-image" width="20" alt="">
+    //                 <i class="fas fa-circle online-user"></i>
+    //                 <p class="name-bar"><b></b></p>
+    //                 <b class="time-bar text-right flex-auto"></b>
+    //             </div>
+
+    //             <div class="thread-content">
+
+    //                 <div class="plain-content">
+    //                     <p class="thread-title-dashboard"><b>${doc.data().thread_title}</b></p>
+    //                     <p class="thread-desc-dashboard"><b>${doc.data().thread_description}</b></p>
+    //                 </div>
+
+    //                 <div class="thread-attachments">
+    //                     <img class="image-attachment" src="../resources/images/attachment_icon.png" alt="">
+    //                 </div>
+
+    //                 <div class="add-comment">
+    //                     <p>Add comment:</p>
+    //                     <div class="flex comment-input">
+    //                         <input type="text">
+    //                         <button class="post-button">Post</button>
+    //                     </div>
+    //                 </div>
+
+    //                 <div>
+    //                     <p class="text-right color-website"><b>4 Comments</b></p>
+    //                 </div>
+
+    //             </div>
+
+    //             <div class="thread-comments">
+
+    //                 <div class="comment">
+    //                     <div class="flex">
+    //                         <p class="name-bar"><b>Akhil Goyal</b></p>
+    //                     </div>
+    //                     <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+    //                 </div>
+
+    //                 <div class="comment">
+    //                     <div class="flex">
+    //                         <p class="name-bar"><b>Akhil Goyal</b></p>
+    //                     </div>
+    //                     <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+    //                 </div>
+
+    //                 <div class="comment">
+    //                     <div class="flex">
+    //                         <p class="name-bar"><b>Akhil Goyal</b></p>
+    //                     </div>
+    //                     <p class="user-comment">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
+    //                 </div>
+
+    //             </div>
+
+    //         </div>
+    //             `
+
+    //         });
+    //     });
 
     // actualBtn.addEventListener('change', function () {
     //     fileChosen.innerHTML = ''
