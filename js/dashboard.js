@@ -33,17 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    const commentsSection = (comments) => {
-        let dummyValues = ``
-        if (comments !== undefined && comments.length > 0)
-            images.map((elem) => dummyValues += `<div class="comment">
-                                                    <div class="flex">
-                                                        <p class="name-bar"><b></b></p>
-                                                    </div>
-                                                    <p class="user-comment"></p>
-                                                </div>`
-            )
-        return dummyValues
+    const commentsSection = (userName, Comment, Time) => {
+        debugger
+        return `<div class="comment">
+        <div class="flex">
+            <p class="name-bar"><b>${userName}</b></p>
+        </div>
+        <p class="user-comment">${Comment}</p>
+    </div>`;
     }
 
     const fetchComments = (threadId) => {
@@ -51,29 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
         let commentsArray = [];
 
         db
-            .collection("comments")
-            .orderBy("timestamp", "desc")
+            .collection("comments").where("thread_id", "==", threadId)
             .onSnapshot((querySnapshot) => {
-
-
                 querySnapshot.forEach((doc) => {
-                    
-                    if(doc.data().thread_id === threadId){
-                        
-                        commentsArray.push({
-                            "user_name" : doc.data().user_name,
-                            "user_comment" : doc.data().comment,
-                            "comment_time": doc.data().timestamp,
-                        });
-                        
-                    }
+                    document.getElementById(`thread-${threadId}`).innerHTML +=
+                        commentsSection(doc.data().user_name, doc.data().comment, doc.data().timestamp)
 
                 })
 
 
             })
 
-            return commentsArray;
+        return commentsArray;
     }
 
     listRef
@@ -100,11 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             querySnapshot.forEach((doc) => {
                 const thread_elements = CreateThreadElements(doc.data().thread_attachments)
-                //Need to find comments from comment table
-
-
-
-                const _comments = commentsSection(fetchComments(doc.id))
+                fetchComments(doc.id)
                 const _commentCount = 0
                 threadContainer.innerHTML += `
                                             <div class="thread shadow">
@@ -139,8 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             
                                             </div>
                             
-                                            <div class="thread-comments">                            
-                                                ${_comments}                            
+                                            <div id="thread-${doc.id}" class="thread-comments">                        
                                             </div>
                             
                                         </div>
