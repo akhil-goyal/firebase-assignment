@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetchComments(doc.id)
                 const _commentCount = 0
                 threadContainer.innerHTML += `
-                                            <div class="thread shadow">
+                                            <div class="thread thread-shadow">
 
                                             <div class="flex">
                                                 <img src="../resources/images/user_avatar.png" class="thread-image" width="20" alt="">

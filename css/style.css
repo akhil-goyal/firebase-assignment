@@ -57,6 +57,14 @@
     /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
 }
 
+.thread-shadow {
+    box-shadow: 0 4px 8px 0 rgb(33 61 150 / 10%), 0 6px 20px 0 rgb(33 61 150 / 58%);
+    /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    box-shadow: 0 4px 8px 0 rgb(33 61 150 / 10%), 0 6px 20px 0 rgb(33 61 150 / 58%);
+    /* Firefox 3.5 - 3.6 */
+    box-shadow: 0 4px 8px 0 rgb(33 61 150 / 10%), 0 6px 20px 0 rgb(33 61 150 / 58%);
+}
+
 .primary-color {
     color: var(--primary-color);
 }
