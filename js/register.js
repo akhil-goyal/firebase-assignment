@@ -1,98 +1,85 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener('DOMContentLoaded', () => {
 
-    // get all elements
-    const db = firebase.firestore();
     const form = document.getElementById("register-form");
     const fullName = document.getElementById("fullName");
     const email = document.getElementById("email");
     const password = document.getElementById("password");
     const uploadPhoto = document.getElementById("profile-image-upload");
 
-    // create global file var
     let file = "";
     let fileName = "";
     let fileExt = "";
 
-    // to get file info when image changed
-    uploadPhoto.addEventListener("change", function (event) {
-        file = event.target.files[0];
+    const db = firebase.firestore();
+
+    uploadPhoto.addEventListener("change", (e) => {
+        file = e.target.files[0];
         fileName = file.name.split(".").shift();
         fileExt = file.name.split(".").pop();
-
     });
 
-    // when registration form is submitted
-    form.addEventListener("submit", function (event) {
+    form.addEventListener('submit', (event) => {
 
         event.preventDefault();
 
-        // create var to save filename in storage
-        let uploadedFileName = '';
+        if (email.value
+            && fullName.value
+            && password.value) {
 
-        // if file is uploaded 
-        if (fileName) {
-
-            // get unique image id
-            const imageId = db.collection("Images").doc().id;
-
-            // create file name using id and ext
-            uploadedFileName = `${imageId}.${fileExt}`;
-
-            // get image ref from storage
-            const storageRef = firebase.storage().ref(`images/${uploadedFileName}`);
-
-            // upload image
-            storageRef.put(file);
-        }
-
-        // if all mandatory info provided 
-        if (fullName.value && email.value && password.value) {
-
-            // create user using email password auth
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(email.value, password.value)
-                .then(function (data) {
+                .then(() => {
 
-                    // get user object
                     const user = firebase.auth().currentUser;
 
-                    // add user in firesore
-                    addUser(user.uid, fullName.value, email.value, uploadedFileName);
+                    const storageRef = firebase.storage().ref(`images/${user.uid}.${fileExt}`);
+                    const uploadTask = storageRef.put(file);
 
-                    const userData = {
-                        userName: fullName.value,
-                        userImage: uploadedFileName,
-                        userEmail: email.value
-                    }
+                    uploadTask.on(
+                        "state_changed",
+                        function () { },
+                        function (error) {
+                            console.log(error);
+                        },
+                        function () {
+                            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                                addUser(user.uid, email.value, fullName.value, downloadURL);
 
-                    localStorage.setItem('userData', JSON.stringify(userData));
+                                const userData = {
+                                    userName: fullName.value,
+                                    userImage: downloadURL,
+                                    userEmail: email.value
+                                }
+                        
+                                localStorage.setItem('userData', JSON.stringify(userData));
+
+                            });
+                        }
+                    );
+
                 })
-                .catch((error) => console.log("error", error));
+                .catch((err) => console.log("err", err));
+
         }
+
     });
 
-    // func to add user in firestore 
-    function addUser(userId, fullName, email, uploadedFileName) {
+    function addUser(uid, email, name, url) {
 
-        // create user doc using user id provided by auth
         db.collection("Users")
-            .doc(userId)
+            .doc(uid)
             .set({
-                full_name: fullName,
-                user_id: userId,
+                full_name: name,
+                user_id: uid,
                 email_address: email,
-                profile_image: uploadedFileName,
+                profile_image: url,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             })
-            .then(function () {
-
-                // redirect to dashboard
+            .then(() => {
                 window.location = "dashboard.html";
             })
-            .catch(function (error) {
-                console.log("Error adding document", error);
-            });
+            .catch((err) => console.log("err", err));
     }
 
 });
