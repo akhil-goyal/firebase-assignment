@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 thread_description: threadDesc.value,
                 thread_attachments: fileNames,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                userName: user.userName
             })
             .then(function () {
 
