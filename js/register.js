@@ -62,7 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     const userData = {
                         userName: fullName.value,
-                        userImage: uploadedFileName
+                        userImage: uploadedFileName,
+                        userEmail: email.value
                     }
 
                     localStorage.setItem('userData', JSON.stringify(userData));

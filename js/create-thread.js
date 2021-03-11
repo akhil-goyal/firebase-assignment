@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const user = JSON.parse(localStorage.getItem('userData'));
 
+    console.log('USER : ', user);
+
     // create global file var
     let files = [];
 
@@ -89,7 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 thread_description: threadDesc.value,
                 thread_attachments: fileNames,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                user_name: user.userName
+                user_name: user.userName,
+                user_email: user.userEmail
             })
             .then(function () {
 
@@ -157,14 +160,14 @@ tinymce.init({
     selector: '#thread-description',
     menubar: false,
     plugins: [
-      'advlist autolink lists link image charmap print preview anchor',
-      'searchreplace visualblocks code fullscreen',
-      'insertdatetime media table paste code help wordcount'
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount'
     ],
     resize: false,
     toolbar: 'undo redo | formatselect | ' +
-    'bold italic backcolor | alignleft aligncenter ' +
-    'alignright alignjustify | bullist numlist outdent indent | ' +
-    'removeformat | help',
+        'bold italic backcolor | alignleft aligncenter ' +
+        'alignright alignjustify | bullist numlist outdent indent | ' +
+        'removeformat | help',
     content_style: 'body { font-family: "Poppins",sans-serif; font-size:14px }'
 });
