@@ -28,7 +28,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const CreateThreadElements = (images) => {
         let dummyValues = ``
-        const imagesList = images.map((elem) => dummyValues += `<img class="image-attachment" src="${elem}" alt="">`)
+        if (images.length > 0)
+            images.map((elem) => dummyValues += `<img class="image-attachment" src="${elem}" alt="">`)
         return `<div class="thread-attachments">${dummyValues}</div>`
     }
 

@@ -42,28 +42,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // if file is uploaded 
         if (files.length > 0) {
-
             let imageCount = 0;
+            let fileNames = [];
 
             files.map(file => {
-
-                console.log('FILE CHECK : ', file);
-
                 // get unique image id
                 const imageId = db.collection("Images").doc().id;
 
                 // create file name using id and ext
                 uploadedFileName = `${imageId}.${file.fileExtension}`;
 
-                // get image ref from storage
-                // const storageRef = firebase.storage().ref(`images/${uploadedFileName}`);
-
-                var metadata = { contentType: 'image/jpeg' };
-
                 const storageRef = firebase.storage().ref(`images/${uploadedFileName}`);
 
                 // upload image
-                const uploadTask = storageRef.put(file.fileData, metadata);
+                const uploadTask = storageRef.put(file.fileData);
 
                 uploadTask.on(
                     "state_changed",
@@ -72,9 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         console.log(error);
                     },
                     function () {
-
-                        let fileNames = [];
-
                         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                             imageCount += 1;
                             fileNames.push(downloadURL);
