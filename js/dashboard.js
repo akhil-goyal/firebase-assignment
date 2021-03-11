@@ -20,9 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DASHBOARD : ', user);
 
     userName.innerHTML = `Welcome, ${user.userName}`;
-
-    const listRef = firebase.storage().ref("images");
-
+    userImage.src = user.userImage;
 
     const CreateThreadElements = (images) => {
         let dummyValues = ``
@@ -31,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<div class="thread-attachments">${dummyValues}</div>`
     }
 
-
     const timeStamp = (datevalue) => {
         const _timeStmp = new Date(datevalue).getTime()
         const newDate = new Date(_timeStmp * 1000)
@@ -39,8 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const Minutes = newDate.getMinutes()
         return (Hours < 10 ? '0' + Hours : Hours) + ':' + (Minutes < 10 ? '0' + Minutes : Minutes)
     }
-
-
 
     const commentsSection = (userName, Comment, Time) => {
         const getTime = timeStamp(Time)
@@ -70,21 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return commentsArray;
     }
-
-    listRef
-        .listAll()
-        .then(function (res) {
-            res.items.forEach(function (itemRef) {
-                itemRef
-                    .getDownloadURL()
-                    .then(function (downloadURL) {
-                        downloadURL.includes(user.userImage) ? userImage.src = downloadURL : ''
-                    })
-                    .catch((error) => console.log("error", error));
-            });
-        })
-        .catch((error) => console.log("error", error));
-
 
     db
         .collection("threads")

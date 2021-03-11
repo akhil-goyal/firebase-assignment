@@ -18,22 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let files = [];
 
     userName.innerHTML = `Welcome, ${user.userName}`;
-
-    const listRef = firebase.storage().ref("images");
-
-    listRef
-        .listAll()
-        .then(function (res) {
-            res.items.forEach(function (itemRef) {
-                itemRef
-                    .getDownloadURL()
-                    .then(function (downloadURL) {
-                        downloadURL.includes(user.userImage) ? userImage.src = downloadURL : ''
-                    })
-                    .catch((error) => console.log("error", error));
-            });
-        })
-        .catch((error) => console.log("error", error));
+    userImage.src = user.userImage;
 
     threadForm.addEventListener('submit', (event) => {
 
