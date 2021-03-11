@@ -82,8 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const addThread = (fileNames) => {
 
-        const user = firebase.auth().currentUser;
-
         db.collection("threads")
             .doc(user.uid)
             .set({
@@ -91,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 thread_description: threadDesc.value,
                 thread_attachments: fileNames,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                userName: user.userName
+                user_name: user.userName
             })
             .then(function () {
 

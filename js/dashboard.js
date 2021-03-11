@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <div class="flex">
                                                 <img src="../resources/images/user_avatar.png" class="thread-image" width="20" alt="">
                                                 <i class="fas fa-circle online-user"></i>
-                                                <p class="name-bar"><b></b></p>
+                                                <p class="name-bar"><b>${doc.data().user_name}</b></p>
                                                 <b class="time-bar text-right flex-auto">${doc.data().timestamp.toDate().toDateString()}</b>
                                             </div>
                             
