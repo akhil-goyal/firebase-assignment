@@ -1,27 +1,16 @@
-const user = JSON.parse(localStorage.getItem('userData'));
 const db = firebase.firestore();
+let loggedInUser;
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // const actualBtn = document.getElementById('actual-btn');
-    // const fileChosen = document.getElementById('uploaded-files');
     const userName = document.querySelector('.user-name');
     const userImage = document.querySelector('#profile-image1');
 
     let threadContainer = document.querySelector('.thread-list');
-    let threadDate = document.querySelector('.time-bar');
-    let threadTitle = document.querySelector('.thread-title-dashboard');
-    let threadDesc = document.querySelector('.thread-desc-dashboard');
-    let threadAuthor = document.querySelector('.name-bar');
-    let authorAvatar = document.querySelector('.thread-image');
 
-    let attachmentImage = document.querySelector('.image-attachment');
-
-    console.log('DASHBOARD : ', user);
-
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            getUser(user.uid);
+    firebase.auth().onAuthStateChanged((currentUser) => {
+        if (currentUser) {
+            getUser(currentUser.uid);
         } else {
             console.log('User is not authenticated.');
         }
@@ -33,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .get()
             .then((doc) => {
                 if (doc.exists) {
+                    loggedInUser = doc.data();
                     userName.innerHTML = `Welcome, ${doc.data().full_name}`;
                     userImage.src = doc.data().profile_image;
                 } else {
@@ -40,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
     }
-
 
     const CreateThreadElements = (images) => {
         let dummyValues = ``
@@ -145,10 +134,10 @@ const postComment = (threadId) => {
 
     const comment = document.getElementById(`post-comment-${threadId}`);
 
-    const userName = user.userName;
+    const userName = loggedInUser.user_name;
 
     db.collection("comments")
-        .doc(user.uid)
+        .doc(loggedInUser.user_id)
         .set({
             comment: comment.value,
             thread_id: threadId,

@@ -46,13 +46,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                                 addUser(user.uid, email.value, fullName.value, downloadURL);
 
-                                const userData = {
-                                    userName: fullName.value,
-                                    userImage: downloadURL,
-                                    userEmail: email.value
-                                }
+                                // const userData = {
+                                //     userName: fullName.value,
+                                //     userImage: downloadURL,
+                                //     userEmail: email.value
+                                // }
                         
-                                localStorage.setItem('userData', JSON.stringify(userData));
+                                // localStorage.setItem('userData', JSON.stringify(userData));
 
                             });
                         }
