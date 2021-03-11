@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // create global file var
     let files = [];
 
-    let fileNames = [];
-
     userName.innerHTML = `Welcome, ${user.userName}`;
 
     const listRef = firebase.storage().ref("images");
@@ -45,7 +43,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // if file is uploaded 
         if (files.length > 0) {
 
+            let imageCount = 0;
+
             files.map(file => {
+
+                console.log('FILE CHECK : ', file);
 
                 // get unique image id
                 const imageId = db.collection("Images").doc().id;
@@ -53,46 +55,68 @@ document.addEventListener('DOMContentLoaded', () => {
                 // create file name using id and ext
                 uploadedFileName = `${imageId}.${file.fileExtension}`;
 
-                fileNames.push(uploadedFileName);
-
                 // get image ref from storage
+                // const storageRef = firebase.storage().ref(`images/${uploadedFileName}`);
+
+                var metadata = { contentType: 'image/jpeg' };
+
                 const storageRef = firebase.storage().ref(`images/${uploadedFileName}`);
 
                 // upload image
-                storageRef.put(file.fileData);
+                const uploadTask = storageRef.put(file, metadata);
+
+                uploadTask.on(
+                    "state_changed",
+                    function () { },
+                    function (error) {
+                        console.log(error);
+                    },
+                    function () {
+
+                        let fileNames = [];
+
+                        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                            imageCount += 1;
+                            fileNames.push(downloadURL);
+                            if (imageCount === files.length) {
+                                addThread(fileNames)
+                            }
+                        });
+                    }
+                );
 
             });
 
         }
 
-        if (threadTitle.value && threadDesc.value) {
-
-            const user = firebase.auth().currentUser;
-
-            db.collection("threads")
-                .doc(user.uid)
-                .set({
-                    thread_title: threadTitle.value,
-                    thread_description: threadDesc.value,
-                    thread_attachments: fileNames,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                })
-                .then(function () {
-
-                    threadTitle.value = '';
-                    threadDesc.value = '';
-                    files = [];
-                    alert('Thread created successfully!');
-                    // redirect to dashboard
-                    // window.location = "dashboard.html";
-                })
-                .catch(function (error) {
-                    console.log("Error adding document", error);
-                });
-
-        }
-
     })
+
+    const addThread = (fileNames) => {
+
+        const user = firebase.auth().currentUser;
+
+        db.collection("threads")
+            .doc(user.uid)
+            .set({
+                thread_title: threadTitle.value,
+                thread_description: threadDesc.value,
+                thread_attachments: fileNames,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+            .then(function () {
+
+                threadTitle.value = '';
+                threadDesc.value = '';
+                files = [];
+                alert('Thread created successfully!');
+                // redirect to dashboard
+                // window.location = "dashboard.html";
+            })
+            .catch(function (error) {
+                console.log("Error adding document", error);
+            });
+
+    }
 
     const spanElement = (elem) => {
 
