@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const commentBox = document.getElementById(`thread-${threadId}`)
                 const commentCount = document.getElementById(`commentCount-${threadId}`)
                 commentBox.innerHTML = ``
-                commentCount.innerHTML = querySnapshot.size
+                commentCount.innerHTML = `${querySnapshot.size} comment(s)`
                 querySnapshot.forEach((doc) => {
                     commentBox.innerHTML +=
                         commentsSection(doc.data().user_name, doc.data().comment, doc.data().timestamp)
