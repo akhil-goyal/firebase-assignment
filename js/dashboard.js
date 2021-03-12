@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    getUser = (uid) => {
+    const getUser = (uid) => {
         db.collection("Users")
             .doc(uid)
             .get()
@@ -46,14 +46,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return (Hours < 10 ? '0' + Hours : Hours) + ':' + (Minutes < 10 ? '0' + Minutes : Minutes)
     }
 
-    const commentsSection = (userName, Comment, Time) => {
-        const getTime = timeStamp(Time)
+    const commentsSection = (userName, comment, time) => {
+        const getTime = timeStamp(time)
         return `<div class="comment">
                     <div class="flex">
-                        <p class="name-bar width-100"><b>${userName}</b><span class="time-bar-comments float-right span-time flex-auto">${Time.toDateString()} ${getTime}</span></p>
+                        <p class="name-bar width-100"><b>${userName}</b><span class="time-bar-comments float-right span-time flex-auto">${time} ${getTime}</span></p>
                         
                     </div>
-                    <p class="user-comment">${Comment}</p>
+                    <p class="user-comment">${comment}</p>
                 </div>`;
     }
 
@@ -83,17 +83,31 @@ document.addEventListener('DOMContentLoaded', () => {
             threadContainer.innerHTML = ``;
 
             querySnapshot.forEach((doc) => {
-                const thread_elements = CreateThreadElements(doc.data().thread_attachments)
+
+                const thread_elements = CreateThreadElements(doc.data().thread_attachments);
+
                 fetchComments(doc.id)
+
                 const _timeStamp = timeStamp(doc.data().timestamp.toDate())
-                const _commentCount = 0
-                threadContainer.innerHTML += `
+
+                const _commentCount = 0;
+
+                console.log(doc.data());
+
+                db
+                    .collection("Users")
+                    .orderBy("timestamp", "desc")
+                    .onSnapshot((querySnapshot) => {
+
+                        querySnapshot.forEach((userDoc) =>
+
+                            threadContainer.innerHTML += `
                                             <div class="thread thread-shadow">
 
                                             <div class="flex">
-                                                <img src="../resources/images/user_avatar.png" class="thread-image" width="20" alt="">
+                                                <img src=${userDoc.data().profile_image} class="thread-image" width="20" alt="">
                                                 <i class="fas fa-circle online-user"></i>
-                                                <p class="name-bar"><b>${doc.data().user_name}</b></p>
+                                                <p class="name-bar"><b>${userDoc.data().full_name}</b></p>
                                                 <b class="time-bar text-right flex-auto">${doc.data().timestamp.toDate().toDateString()} ${_timeStamp}</b>
                                             </div>
                             
@@ -125,7 +139,11 @@ document.addEventListener('DOMContentLoaded', () => {
                             
                                         </div>
                                             `
-            })
+
+                        )
+                    })
+            });
+
         });
 
 })
@@ -134,7 +152,9 @@ const postComment = (threadId) => {
 
     const comment = document.getElementById(`post-comment-${threadId}`);
 
-    const userName = loggedInUser.user_name;
+    const userName = loggedInUser.full_name;
+
+    console.log(loggedInUser)
 
     db.collection("comments")
         .doc(loggedInUser.user_id)
