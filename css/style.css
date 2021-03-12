@@ -153,6 +153,19 @@
     font-weight: bold;
 }
 
+.thread-content ul {
+    list-style-type: disc;
+}
+
+.thread-content p {
+    font-weight: normal;
+}
+
+.thread-content a {
+    text-decoration: underline;
+    color: blue;
+}
+
 /*---------- Error Styling -----------*/
 
 .error-effect {
