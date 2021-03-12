@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
 
-            if (newpassword !== '') {
+            if (newpassword !== '********' && newpassword !== ``) {
 
                 user.updatePassword(newpassword).then(() => {
                     debugger;
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     fullName.value = doc.data().full_name;
                     email.value = doc.data().email_address;
                     profilePicture.src = doc.data().profile_image != "" ? doc.data().profile_image : "../resources/images/user_avatar.png";
-
+                    password.value = `********`
                     userName.innerHTML = fullName.value
                     userEmail.innerHTML = email.value
                     userImage.src = doc.data().profile_image != "" ? doc.data().profile_image : "../resources/images/user_avatar_white.png";
