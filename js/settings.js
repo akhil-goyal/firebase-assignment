@@ -56,21 +56,21 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
 
             if (newpassword !== '********' && newpassword !== ``) {
-
+                alert(1)
                 user.updatePassword(newpassword).then(() => {
                     debugger;
-                    if (userName !== fullname) {
+                    if (fullname !== `` && userName.innerText.trim().toUpperCase() !== fullname.trim().toUpperCase()) {
                         db.collection("Users").doc(uid).update({
                             full_name: fullname
                         });
                     }
-
                     showProfileMessage(`Profile updated successfully!`, `success`)
                 }).catch((error) => {
                     showProfileMessage(`An error occured while updating password : ${error}`, `error`)
                 });
 
-            } else if (userName !== fullname) {
+            } else if (fullname !== `` && userName.innerText.trim().toUpperCase() !== fullname.trim().toUpperCase()) {
+                alert(2)
                 db.collection("Users").doc(uid).update({
                     full_name: fullname
                 });
@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (file !== '') {
+                alert(3)
                 db.collection("Users").doc(uid).update({
                     profile_image: imageUrl
                 });
