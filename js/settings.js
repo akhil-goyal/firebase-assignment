@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const buttonUpdate = document.getElementById("update");
     const loaderContent = document.getElementById(`loader-div`)
     const registerForm = document.getElementById(`register-form`)
+    const userEmail = document.querySelector('.user-email');
+    const userDetailsloader = document.getElementById('userDetailsloader');
+    const currentUser = document.getElementById('current-user-details');
+    const userImage = document.querySelector('#profile-image1');
+    const userName = document.querySelector('.user-name');
 
     const db = firebase.firestore();
 
@@ -58,10 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 loaderContent.remove()
                 registerForm.classList.remove(`hidden`)
                 if (doc.exists) {
+                    userDetailsloader.remove()
+                    currentUser.classList.remove(`hidden`)
                     fullName.value = doc.data().full_name;
                     email.value = doc.data().email_address;
                     password.value = "***********";
                     profilePicture.src = doc.data().profile_image != "" ? doc.data().profile_image : "../../resources/images/user_avatar.png";
+
+                    userName.innerHTML = fullName.value
+                    userEmail.innerHTML = email.value
+                    userImage.src = doc.data().profile_image != "" ? doc.data().profile_image : "../../resources/images/user_avatar_white.png";
+
                 } else {
                     console.log("No such document");
                 }

@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const userName = document.querySelector('.user-name');
     const userImage = document.querySelector('#profile-image1');
+    const userEmail = document.querySelector('.user-email');
+    const loader = document.getElementById('loader');
+    const currentUser = document.getElementById('current-user-details');
 
     let threadContainer = document.querySelector('.thread-list');
 
@@ -21,9 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .doc(uid)
             .get()
             .then((doc) => {
+                loader.remove()
+                currentUser.classList.remove(`hidden`)
                 if (doc.exists) {
                     loggedInUser = doc.data();
-                    userName.innerHTML = `Welcome, ${doc.data().full_name}`;
+                    userName.innerHTML = `${doc.data().full_name}`
+                    userEmail.innerHTML = `${doc.data().email_address}`
                     userImage.src = doc.data().profile_image == "" ? "../../resources/images/user_avatar_white.png" : doc.data().profile_image;
                 } else {
                     console.log("No such document");
