@@ -73,6 +73,16 @@
     width: 40vh;
 }
 
+.success {
+    background-color: green;
+    color: white;
+}
+
+.error {
+    background-color: red;
+    color: white;
+}
+
 /*------- Grid css -------*/
 
 .grid {
