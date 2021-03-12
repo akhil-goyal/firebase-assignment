@@ -19,6 +19,8 @@
     <script src="https://kit.fontawesome.com/bb1feba9b1.js" crossorigin="anonymous"></script>
     <script src="https://cdn.tiny.cloud/1/uh3jitnuy11puzfsncgbvzby7aww3yr8i6l0j605nvtxzm46/tinymce/5/tinymce.min.js"
         referrerpolicy="origin"></script>
+    <script src="../js/checkSession.js"></script>
+    <script>redirectIfNotLoggedIn();</script>
 </head>
 
 <body>
@@ -28,7 +30,8 @@
             <div class="height-100 width-30 menu-options">
                 <div class="profile-pic pad-top-4 text-center">
                     <img alt="User Pic" src="../resources/images/user_avatar_white.png" id="profile-image1">
-                    <div id="userDetailsloader" class="text-center"><img src="../resources/images/loader_white.svg" alt=""></div>
+                    <div id="userDetailsloader" class="text-center"><img src="../resources/images/loader_white.svg"
+                            alt=""></div>
                     <div id="current-user-details" class="hidden">
                         <h4 class="user-name user-details-left"></h4>
                         <h6 class="user-email user-details-left"></h6>
@@ -93,8 +96,6 @@
 
     <script src="../js/firebase.js"></script>
     <script src="../js/auth.js"></script>
-    <script src="../js/checkSession.js"></script>
-    <script>redirectIfNotLoggedIn();</script>
     <script src="../js/index.js"></script>
     <script src="../js/settings.js"></script>
 

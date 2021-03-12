@@ -28,9 +28,9 @@
                     <div class="nav-options">
                         <nav>
                             <ul class="flex flex-gap-2 flex-right">
-                                <li><a href="">Home</a></li>
-                                <li><a href="">Threads</a></li>
-                                <li><a href="">Contact</a></li>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="./pages/dashboard.html">Threads</a></li>
+                                <li><a aria-disabled="true" href="#">Contact</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -39,7 +39,7 @@
             <div class="content">
                 <p class="tech-talks">Hi! <br />Tech Talks is Live Now</p>
                 <div class="buttons">
-                    <button class="btn btn-explore">Explore Threads</button>
+                    <button id="btnExplore" class="btn btn-explore">Explore Threads</button>
                     <button class="transparent-button arrow-down bounce"><i class="fas fa-angle-down"></i></button>
                 </div>
             </div>
@@ -107,6 +107,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+    <script src="./js/homepage.js"></script>
     
 </body>
 
