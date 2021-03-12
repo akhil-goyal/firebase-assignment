@@ -196,7 +196,8 @@ footer {
     padding: 0.5em 0.6em;
     border-radius: 20px;
     display: block;
-    width: 90%;
+    display: inline-block;
+    width: auto;
     margin: 0.2em 0;
 }
 
