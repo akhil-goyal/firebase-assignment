@@ -52,9 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return (Hours < 10 ? '0' + Hours : Hours) + ':' + (Minutes < 10 ? '0' + Minutes : Minutes)
     }
 
-    const commentsSection = (userName, comment, time) => {
+    const commentsSection = (userName, comment, time, userPic) => {
         return `<div class="comment">
                     <div class="flex">
+                        <img src=${userPic} class="thread-comment-image thread-image" width="20" alt="">
                         <p class="name-bar-commentUser" width-100"><b>${userName}</b><span class="time-bar-comments float-right span-time flex-auto">${time.toDateString()} ${timeStamp(time)}</span></p>
                         
                     </div>
@@ -68,8 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .onSnapshot((querySnapshot) => {
                 querySnapshot.forEach((userDoc) => {
                     const details = userDoc.data()
+                    const commentUserPic = details.profile_image == "" ? "../resources/images/user_avatar.png" : details.profile_image;
                     commentBox.innerHTML +=
-                        commentsSection(details.full_name, comment, timestamp.toDate())
+                        commentsSection(details.full_name, comment, timestamp.toDate(), commentUserPic)
                 })
             })
     }
