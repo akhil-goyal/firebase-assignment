@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
 
             if (newpassword !== '********' && newpassword !== ``) {
-                alert(1)
                 user.updatePassword(newpassword).then(() => {
                     debugger;
                     if (fullname !== `` && userName.innerText.trim().toUpperCase() !== fullname.trim().toUpperCase()) {
@@ -70,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
             } else if (fullname !== `` && userName.innerText.trim().toUpperCase() !== fullname.trim().toUpperCase()) {
-                alert(2)
                 db.collection("Users").doc(uid).update({
                     full_name: fullname
                 });
@@ -78,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (file !== '') {
-                alert(3)
                 db.collection("Users").doc(uid).update({
                     profile_image: imageUrl
                 });
