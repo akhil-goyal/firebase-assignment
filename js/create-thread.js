@@ -77,7 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         else {
-            addThread("")
+            setTimeout(() => {
+                addThread("")
+            }, 3000);
         }
     })
     const addThread = (fileNames) => {
