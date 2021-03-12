@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     querySnapshot.forEach((doc) => {
                         fetchGlobalUser(doc.data().user_id, commentBox, doc.data().comment, doc.data().timestamp)
                     })
-                }, 1000);
+                }, 2000);
             })
     }
 
@@ -183,7 +183,7 @@ const postComment = (threadId) => {
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             })
             .then(() => {
-
+                comment.value = ``
             })
             .catch((err) => console.log("err", err));
     }
