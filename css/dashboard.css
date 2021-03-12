@@ -245,6 +245,8 @@ footer {
     width: 100%;
     padding-left: 0.2em;
     padding-top: 0.8em;
+    color: var(--website-color);
+    font-weight: bold;
 }
 
 .name-bar {
