@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const threadDesc = document.querySelector('#thread-description');
     const loader = document.getElementById(`loader`)
     const succMsg = document.getElementById(`success_message`)
+    const userEmail = document.querySelector('.user-email');
+    const userDetailsloader = document.getElementById('userDetailsloader');
+    const currentUser = document.getElementById('current-user-details');
 
     const db = firebase.firestore();
 
@@ -25,15 +28,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    getUser = (uid) => {
+    const getUser = (uid) => {
         db.collection("Users")
             .doc(uid)
             .get()
             .then((doc) => {
+                userDetailsloader.remove()
+                currentUser.classList.remove(`hidden`)
                 if (doc.exists) {
                     loggedInUser = doc.data();
-                    userName.innerHTML = `Welcome, ${doc.data().full_name}`;
-                    userImage.src = doc.data().profile_image;
+                    userName.innerHTML = `${doc.data().full_name}`
+                    userEmail.innerHTML = `${doc.data().email_address}`
+                    userImage.src = doc.data().profile_image == "" ? "../../resources/images/user_avatar_white.png" : doc.data().profile_image;
                 } else {
                     console.log("No such document");
                 }
