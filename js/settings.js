@@ -1,4 +1,6 @@
 let userRef = null;
+let imageUrl;
+
 const loaderMain = document.getElementById(`loader-main`)
 const profileMsg = document.getElementById(`profileMessage`)
 
@@ -20,20 +22,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const db = firebase.firestore();
 
+    let file = "";
+    let fileName = "";
+    let fileExt = "";
+
+    updatePicture.addEventListener("change", (e) => {
+        file = e.target.files[0];
+        fileName = file.name.split(".").shift();
+        fileExt = file.name.split(".").pop();
+    });
+
     function updateUser(uid, fullname, picture, newpassword) {
+
+        const storageRef = firebase.storage().ref(`images/${uid}.${fileExt}`);
+        const uploadTask = storageRef.put(file);
+
+        uploadTask.on(
+            "state_changed",
+            function () { },
+            function (error) {
+                console.log(error);
+            },
+            function () {
+                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    imageUrl = downloadURL;
+                });
+            }
+        );
 
         // Update Password
         var user = firebase.auth().currentUser;
 
         setTimeout(() => {
-            user.updatePassword(newpassword).then(() => {
+
+            if (newpassword !== '') {
+
+                user.updatePassword(newpassword).then(() => {
+                    debugger;
+                    if (userName !== fullname) {
+                        db.collection("Users").doc(uid).update({
+                            full_name: fullname
+                        });
+                    }
+
+                    showProfileMessage(`Profile updated successfully!`, `success`)
+                }).catch((error) => {
+                    showProfileMessage(`An error occured while updating password : ${error}`, `error`)
+                });
+
+            } else if (userName !== fullname) {
                 db.collection("Users").doc(uid).update({
                     full_name: fullname
                 });
                 showProfileMessage(`Profile updated successfully!`, `success`)
-            }).catch((error) => {
-                showProfileMessage(`An error occured while updating password : ${error}`, `error`)
-            });
+            }
+
+            if (file !== '') {
+                db.collection("Users").doc(uid).update({
+                    profile_image: imageUrl
+                });
+                showProfileMessage(`Profile updated successfully!`, `success`)
+            }
+
         }, 2000)
     }
 
@@ -67,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentUser.classList.remove(`hidden`)
                     fullName.value = doc.data().full_name;
                     email.value = doc.data().email_address;
-                    password.value = "***********";
                     profilePicture.src = doc.data().profile_image != "" ? doc.data().profile_image : "../../resources/images/user_avatar.png";
 
                     userName.innerHTML = fullName.value
