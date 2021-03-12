@@ -56,13 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>`;
     }
 
-    const fetchGlobalUser = (user_id) => {
+    async function fetchGlobalUser(user_id, commentBox, comment, timestamp) {
         db
             .collection("Users").where("user_id", "==", user_id)
             .onSnapshot((querySnapshot) => {
                 querySnapshot.forEach((userDoc) => {
                     const details = userDoc.data()
-                    return details.full_name
+                    commentBox.innerHTML +=
+                        commentsSection(details.full_name, comment, timestamp.toDate())
                 })
             })
     }
@@ -104,13 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     commentBox.innerHTML = ``
                     querySnapshot.forEach((doc) => {
-                        const _userName = fetchGlobalUser(doc.data().user_id)
-                        setTimeout(() => {
-                            commentBox.innerHTML +=
-                                commentsSection(_userName, doc.data().comment, doc.data().timestamp.toDate())
-                        }, 3000)
+                        fetchGlobalUser(doc.data().user_id, commentBox, doc.data().comment, doc.data().timestamp)
                     })
-                }, 4000);
+                }, 1000);
             })
     }
 
