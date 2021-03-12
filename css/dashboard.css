@@ -227,6 +227,8 @@ footer {
 
 .name-bar-commentUser {
     width: 100%;
+    padding-left: 0.6em;
+    padding-top: 0.8em;
 }
 
 .name-bar {
@@ -273,7 +275,6 @@ footer {
 }
 
 .user-comment {
-    padding-top: 0.8em;
     padding-left: 0.6em;
 }
 
