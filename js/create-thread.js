@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
         event.preventDefault();
         // create var to save filename in storage
         let uploadedFileName = '';
+        loader.classList.remove(`hidden`)
         // if file is uploaded 
         if (files.length > 0) {
-            loader.classList.remove(`hidden`)
             let imageCount = 0;
             let fileNames = [];
 

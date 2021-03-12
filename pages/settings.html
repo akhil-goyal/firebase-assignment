@@ -46,7 +46,10 @@
                 </div>
                 <section class="register-section">
                     <div class="text-center">
-                        <div class="register-form shadow" id="register-form">
+                        <div id="loader-div">
+                            <img src="../resources/images/loader.svg" alt="">
+                        </div>
+                        <div class="register-form shadow hidden" id="register-form">
                             <div class="plain-text">
                                 <h1 class="font-40 pad-bottom-10">Setting</h1>
                             </div>
@@ -60,7 +63,7 @@
                                 <input type="text" required placeholder="Full Name" id="settings-fullname">
                             </div>
                             <div>
-                                <input type="email" required placeholder="Email Address" id="settings-email">
+                                <input type="email" required disabled placeholder="Email Address" id="settings-email">
                             </div>
                             <div>
                                 <input type="password" required placeholder="Password" id="settings-password">

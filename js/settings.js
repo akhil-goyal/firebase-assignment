@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const profilePicture = document.getElementById('profile-image');
     const updatePicture = document.getElementById("settings-picture");
     const buttonUpdate = document.getElementById("update");
+    const loaderContent = document.getElementById(`loader-div`)
+    const registerForm = document.getElementById(`register-form`)
 
     const db = firebase.firestore();
 
@@ -18,17 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Update Password
         var user = firebase.auth().currentUser;
 
-        user.updatePassword(newpassword).then(() => {
-            showProfileMessage(`Password updated successfully!`, `success`)
-        }).catch((error) => {
-            showProfileMessage(`An error occured while updating password : ${error}`, `error`)
-        });
-
-        // Update user data
-        db.collection("Users").doc(uid).update({
-            full_name: fullname,
-            profile_image: picture,
-        });
+        setTimeout(() => {
+            user.updatePassword(newpassword).then(() => {
+                db.collection("Users").doc(uid).update({
+                    full_name: fullname
+                });
+                showProfileMessage(`Profile updated successfully!`, `success`)
+            }).catch((error) => {
+                showProfileMessage(`An error occured while updating password : ${error}`, `error`)
+            });
+        }, 2000)
     }
 
     buttonUpdate.addEventListener("click", function () {
@@ -54,11 +55,13 @@ document.addEventListener('DOMContentLoaded', () => {
             .doc(uid)
             .get()
             .then(function (doc) {
+                loaderContent.remove()
+                registerForm.classList.remove(`hidden`)
                 if (doc.exists) {
                     fullName.value = doc.data().full_name;
                     email.value = doc.data().email_address;
                     password.value = "***********";
-                    profilePicture.src = doc.data().profile_image;
+                    profilePicture.src = doc.data().profile_image != "" ? doc.data().profile_image : "../../resources/images/user_avatar.png";
                 } else {
                     console.log("No such document");
                 }
