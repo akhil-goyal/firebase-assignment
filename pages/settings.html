@@ -1,10 +1,11 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Tech Talks</title>
+    <title>Settings - Tech Talks</title>
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboard.css">
@@ -15,9 +16,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/bb1feba9b1.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/uh3jitnuy11puzfsncgbvzby7aww3yr8i6l0j605nvtxzm46/tinymce/5/tinymce.min.js"
+        referrerpolicy="origin"></script>
 </head>
 
 <body>
+
     <main>
         <div class="grid grid-cols-4">
             <div class="height-100 width-30 menu-options">
@@ -28,8 +32,8 @@
                 <nav class="text-center pad-top-4 nav-options">
                     <ul>
                         <li><a href="./create-thread.html">Create New Thread</a></li>
-                        <li class="active-option"><a href="">Threads</a></li>
-                        <li><a href="./settings.html">Settings</a></li>
+                        <li><a href="./dashboard.html">Threads</a></li>
+                        <li class="active-option"><a href="./settings.html">Settings</a></li>
                         <li><a href="#" onclick="logout();">Logout</a></li>
                     </ul>
                 </nav>
@@ -37,7 +41,7 @@
             <div class="grid-span-8 text-left thread-control">
 
                 <div class="new-thread">
-                    <a href="./create-thread.html">+ New Thread</a>
+                    <h1>Settings Page</h1>
                 </div>
 
                 <div class="thread-list">
@@ -57,7 +61,6 @@
     <script src="../js/checkSession.js"></script>
     <script>redirectIfNotLoggedIn();</script>
     <script src="../js/index.js"></script>
-    <script src="../js/dashboard.js"></script>
 
 </body>
 
