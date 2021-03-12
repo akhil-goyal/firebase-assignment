@@ -198,7 +198,7 @@ footer {
     display: block;
     display: inline-block;
     width: auto;
-    margin: 0.2em 0;
+    margin: 0.2em 0.2em 0.2em 0;
 }
 
 .div-uplaoded-doc span {
