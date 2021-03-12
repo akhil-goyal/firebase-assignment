@@ -196,7 +196,7 @@ footer {
     padding: 0.5em 0.6em;
     border-radius: 20px;
     display: block;
-    width: 40%;
+    width: 90%;
     margin: 0.2em 0;
 }
 
@@ -222,10 +222,7 @@ footer {
 
 .file-name {
     display: block;
-    width: 150px;
-    overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .new-thread {
