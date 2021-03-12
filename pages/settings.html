@@ -44,8 +44,21 @@
                     <h1>Settings Page</h1>
                 </div>
 
-                <div class="thread-list">
-
+                <div>
+                    <img style="height: 4em; width: 4em; border-radius: 2em;" alt="User Pic" src="./../resources/images/user_avatar.png" id="profile-image">
+                    Profile Picture:
+                    <input id="settings-picture" type="file" onchange="previewFile()">
+                    <br /><br />
+                    Full Name:
+                    <input type="text" id="settings-fullname" />
+                    <br /><br />
+                    Email:
+                    <input disabled type="text" id="settings-email" />
+                    <br /><br />
+                    Password:
+                    <input type="text" id="settings-password" />
+                    <br /><br />
+                    <input type="submit" id="update" value="Update" />
                 </div>
             </div>
         </div>
@@ -61,6 +74,7 @@
     <script src="../js/checkSession.js"></script>
     <script>redirectIfNotLoggedIn();</script>
     <script src="../js/index.js"></script>
+    <script src="../js/settings.js"></script>
 
 </body>
 
