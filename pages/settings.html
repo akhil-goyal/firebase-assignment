@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/setting.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -43,23 +44,36 @@
                 <div class="new-thread">
                     <h1>Settings Page</h1>
                 </div>
-
-                <div>
-                    <img style="height: 4em; width: 4em; border-radius: 2em;" alt="User Pic" src="./../resources/images/user_avatar.png" id="profile-image">
-                    Profile Picture:
-                    <input id="settings-picture" type="file" onchange="previewFile()">
-                    <br /><br />
-                    Full Name:
-                    <input type="text" id="settings-fullname" />
-                    <br /><br />
-                    Email:
-                    <input disabled type="text" id="settings-email" />
-                    <br /><br />
-                    Password:
-                    <input type="text" id="settings-password" />
-                    <br /><br />
-                    <input type="submit" id="update" value="Update" />
-                </div>
+                <section class="register-section">
+                    <div class="text-center">
+                        <div class="register-form shadow" id="register-form">
+                            <div class="plain-text">
+                                <h1 class="font-40 pad-bottom-10">Setting</h1>
+                            </div>
+                            <div class="profile-pic pad-top-5">
+                                <img style="height: 4em; width: 4em; border-radius: 2em;" alt="User Pic"
+                                    src="./../resources/images/user_avatar.png" id="profile-image">
+                                <input id="settings-picture" type="file" onchange="previewFile()">
+                                <div class="plain-text"> </div>
+                            </div>
+                            <div>
+                                <input type="text" required placeholder="Full Name" id="settings-fullname">
+                            </div>
+                            <div>
+                                <input type="email" required placeholder="Email Address" id="settings-email">
+                            </div>
+                            <div>
+                                <input type="password" required placeholder="Password" id="settings-password">
+                            </div>
+                            <div>
+                                <p id="profileMessage" class="message"></p>
+                            </div>
+                            <div>
+                                <button type="button" id="update" class="btn btn-register">Update</button>
+                            </div>
+                            </form>
+                        </div>
+                </section>
             </div>
         </div>
     </main>

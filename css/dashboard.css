@@ -251,6 +251,7 @@ footer {
     padding-left: 0.4em;
     padding-bottom: 0.5em;
     border-bottom: 2px solid var(--website-color);
+    word-wrap: break-word;
 }
 
 .thread-content p {

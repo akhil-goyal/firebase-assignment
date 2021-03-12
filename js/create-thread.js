@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const threadForm = document.querySelector('.create-thread-form');
     const threadTitle = document.querySelector('#thread-title');
     const threadDesc = document.querySelector('#thread-description');
+    const loader = document.getElementById(`loader`)
+    const succMsg = document.getElementById(`success_message`)
 
     const db = firebase.firestore();
 
@@ -39,29 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     threadForm.addEventListener('submit', (event) => {
-
         event.preventDefault();
-
         // create var to save filename in storage
         let uploadedFileName = '';
-
         // if file is uploaded 
         if (files.length > 0) {
+            loader.classList.remove(`hidden`)
             let imageCount = 0;
             let fileNames = [];
 
             files.map(file => {
                 // get unique image id
                 const imageId = db.collection("Images").doc().id;
-
                 // create file name using id and ext
                 uploadedFileName = `${imageId}.${file.fileExtension}`;
-
                 const storageRef = firebase.storage().ref(`images/${uploadedFileName}`);
-
                 // upload image
                 const uploadTask = storageRef.put(file.fileData);
-
                 uploadTask.on(
                     "state_changed",
                     function () { },
@@ -78,15 +74,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         });
                     }
                 );
-
             });
-
         }
-
+        else {
+            showMessage(`Please add attachments`, `error`)
+        }
     })
-
     const addThread = (fileNames) => {
-
+        clearMessage()
         db.collection("threads")
             .doc(loggedInUser.user_id)
             .set({
@@ -103,14 +98,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 threadTitle.value = '';
                 threadDesc.value = '';
                 files = [];
-                alert('Thread created successfully!');
-                // redirect to dashboard
-                // window.location = "dashboard.html";
+                loader.classList.add(`hidden`)
+                showMessage(`Thread created successfully!`, `success`)
             })
             .catch(function (error) {
-                console.log("Error adding document", error);
+                loader.classList.add(`hidden`)
+                showMessage(`Error adding thread. Error Message: ${error}`, `error`)
             });
 
+    }
+
+    const showMessage = (data, flag) => {
+        succMsg.innerHTML = `<b>${data}</b>`
+        succMsg.classList.add(flag)
+        setTimeout(() => {
+            clearMessage()
+        }, 3000);
+    }
+
+    const clearMessage = () => {
+        succMsg.innerHTML = ``
+        succMsg.classList.remove(`success`)
+        succMsg.classList.remove(`error`)
     }
 
     const spanElement = (elem) => {

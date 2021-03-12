@@ -1,4 +1,6 @@
 let userRef = null;
+const loaderMain = document.getElementById(`loader-main`)
+const profileMsg = document.getElementById(`profileMessage`)
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -17,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
         var user = firebase.auth().currentUser;
 
         user.updatePassword(newpassword).then(() => {
-            console.log('Password updated successfully!');
+            showProfileMessage(`Password updated successfully!`, `success`)
         }).catch((error) => {
-            console.log(`An error occured while updating password : ${error}`);
+            showProfileMessage(`An error occured while updating password : ${error}`, `error`)
         });
 
         // Update user data
@@ -32,6 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
     buttonUpdate.addEventListener("click", function () {
         updateUser(userRef.uid, fullName.value, updatePicture.value, password.value);
     });
+
+    function showProfileMessage(data, flag) {
+        profileMsg.innerHTML = `<b>${data}</b>`
+        profileMsg.classList.add(flag)
+        setTimeout(() => {
+            clearProfileMessage()
+        }, 3000);
+    }
+
+    function clearProfileMessage() {
+        profileMsg.innerHTML = ``
+        profileMsg.classList.remove(`success`)
+        profileMsg.classList.remove(`error`)
+    }
 
     function getUser(uid) {
         db.collection("Users")

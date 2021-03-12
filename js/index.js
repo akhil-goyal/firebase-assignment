@@ -18,3 +18,7 @@ document.getElementById(`profile-image1`).addEventListener(`click`, () => {
     document.getElementById(`profile-image-upload`).click()
 })
 
+// document.getElementById(`profile-image`).addEventListener(`click`, () => {
+//     document.getElementById(`settings-picture`).click()
+// })
+

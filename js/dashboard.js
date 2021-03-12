@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (doc.exists) {
                     loggedInUser = doc.data();
                     userName.innerHTML = `Welcome, ${doc.data().full_name}`;
-                    userImage.src = doc.data().profile_image;
+                    userImage.src = doc.data().profile_image == "" ? "../../resources/images/user_avatar_white.png" : doc.data().profile_image;
                 } else {
                     console.log("No such document");
                 }
@@ -47,10 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const commentsSection = (userName, comment, time) => {
-        const getTime = timeStamp(time)
         return `<div class="comment">
                     <div class="flex">
-                        <p class="name-bar width-100"><b>${userName}</b><span class="time-bar-comments float-right span-time flex-auto">${time} ${getTime}</span></p>
+                        <p class="name-bar width-100"><b>${userName}</b><span class="time-bar-comments float-right span-time flex-auto">${time.toDateString()} ${timeStamp(time)}</span></p>
                         
                     </div>
                     <p class="user-comment">${comment}</p>
@@ -58,21 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const fetchComments = (threadId) => {
-        let commentsArray = [];
         db
             .collection("comments").where("thread_id", "==", threadId)
             .onSnapshot((querySnapshot) => {
                 const commentBox = document.getElementById(`thread-${threadId}`)
                 const commentCount = document.getElementById(`commentCount-${threadId}`)
-                commentBox.innerHTML = ``
+                commentBox.innerHTML = `<div class="text-center"><img src="../resources/images/loader.svg" alt=""></div>`
                 commentCount.innerHTML = `${querySnapshot.size} comment(s)`
-                querySnapshot.forEach((doc) => {
-                    commentBox.innerHTML +=
-                        commentsSection(doc.data().user_name, doc.data().comment, doc.data().timestamp.toDate())
-                })
+                setTimeout(() => {
+                    commentBox.innerHTML = ``
+                    querySnapshot.forEach((doc) => {
+                        commentBox.innerHTML +=
+                            commentsSection(doc.data().user_name, doc.data().comment, doc.data().timestamp.toDate())
+                    })
+                }, 2000);
             })
-
-        return commentsArray;
     }
 
     db
@@ -80,34 +79,36 @@ document.addEventListener('DOMContentLoaded', () => {
         .orderBy("timestamp", "desc")
         .onSnapshot((querySnapshot) => {
 
-            threadContainer.innerHTML = ``;
+            setTimeout(() => {
+                threadContainer.innerHTML = ``;
 
-            querySnapshot.forEach((doc) => {
+                querySnapshot.forEach((doc) => {
 
-                const thread_elements = CreateThreadElements(doc.data().thread_attachments);
+                    const thread_elements = CreateThreadElements(doc.data().thread_attachments);
 
-                fetchComments(doc.id)
 
-                const _timeStamp = timeStamp(doc.data().timestamp.toDate())
+                    const _timeStamp = timeStamp(doc.data().timestamp.toDate())
 
-                const _commentCount = 0;
+                    const _commentCount = 0;
 
-                console.log(doc.data());
+                    console.log(doc.data());
 
-                db
-                    .collection("Users")
-                    .orderBy("timestamp", "desc")
-                    .onSnapshot((querySnapshot) => {
+                    // db
+                    //     .collection("Users")
+                    //     .orderBy("timestamp", "desc")
+                    //     .onSnapshot((querySnapshot) => {
 
-                        querySnapshot.forEach((userDoc) =>
+                    //         querySnapshot.forEach((userDoc) => {
 
-                            threadContainer.innerHTML += `
+                    fetchComments(doc.id)
+
+                    threadContainer.innerHTML += `
                                             <div class="thread thread-shadow">
 
                                             <div class="flex">
-                                                <img src=${userDoc.data().profile_image} class="thread-image" width="20" alt="">
+                                                <img src="../../resources/images/user_avatar.png" class="thread-image" width="20" alt="">
                                                 <i class="fas fa-circle online-user"></i>
-                                                <p class="name-bar"><b>${userDoc.data().full_name}</b></p>
+                                                <p class="name-bar"><b>${doc.data().user_name}</b></p>
                                                 <b class="time-bar text-right flex-auto">${doc.data().timestamp.toDate().toDateString()} ${_timeStamp}</b>
                                             </div>
                             
@@ -140,10 +141,11 @@ document.addEventListener('DOMContentLoaded', () => {
                                         </div>
                                             `
 
-                        )
-                    })
-            });
+                    //})
+                    //})
+                });
 
+            }, 4000);
         });
 
 })

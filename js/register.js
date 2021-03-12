@@ -30,25 +30,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 .auth()
                 .createUserWithEmailAndPassword(email.value, password.value)
                 .then(() => {
-
                     const user = firebase.auth().currentUser;
+                    if (file != "") {
+                        const storageRef = firebase.storage().ref(`images/${user.uid}.${fileExt}`);
+                        const uploadTask = storageRef.put(file);
 
-                    const storageRef = firebase.storage().ref(`images/${user.uid}.${fileExt}`);
-                    const uploadTask = storageRef.put(file);
-
-                    uploadTask.on(
-                        "state_changed",
-                        function () { },
-                        function (error) {
-                            console.log(error);
-                        },
-                        function () {
-                            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                                addUser(user.uid, email.value, fullName.value, downloadURL);
-                            });
-                        }
-                    );
-
+                        uploadTask.on(
+                            "state_changed",
+                            function () { },
+                            function (error) {
+                                console.log(error);
+                            },
+                            function () {
+                                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                                    addUser(user.uid, email.value, fullName.value, downloadURL);
+                                });
+                            }
+                        );
+                    }
+                    else {
+                        addUser(user.uid, email.value, fullName.value, "");
+                    }
                 })
                 .catch((err) => console.log("err", err));
 
