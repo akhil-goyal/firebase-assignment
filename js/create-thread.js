@@ -77,24 +77,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
         else {
-            showMessage(`Please add attachments`, `error`)
+            addThread("")
         }
     })
     const addThread = (fileNames) => {
         clearMessage()
         db.collection("threads")
-            .doc(loggedInUser.user_id)
-            .set({
+            .add({
                 thread_title: threadTitle.value,
                 thread_description: threadDesc.value,
                 thread_attachments: fileNames,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                user_name: loggedInUser.full_name,
-                user_email: loggedInUser.email_address,
                 user_id: loggedInUser.user_id
             })
             .then(function () {
-
                 threadTitle.value = '';
                 threadDesc.value = '';
                 files = [];
@@ -102,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showMessage(`Thread created successfully!`, `success`)
             })
             .catch(function (error) {
+                debugger
                 loader.classList.add(`hidden`)
                 showMessage(`Error adding thread. Error Message: ${error}`, `error`)
             });

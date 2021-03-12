@@ -49,11 +49,48 @@ document.addEventListener('DOMContentLoaded', () => {
     const commentsSection = (userName, comment, time) => {
         return `<div class="comment">
                     <div class="flex">
-                        <p class="name-bar width-100"><b>${userName}</b><span class="time-bar-comments float-right span-time flex-auto">${time.toDateString()} ${timeStamp(time)}</span></p>
+                        <p class="name-bar-commentUser" width-100"><b>${userName}</b><span class="time-bar-comments float-right span-time flex-auto">${time.toDateString()} ${timeStamp(time)}</span></p>
                         
                     </div>
                     <p class="user-comment">${comment}</p>
                 </div>`;
+    }
+
+    const fetchGlobalUser = (user_id) => {
+        db
+            .collection("Users").where("user_id", "==", user_id)
+            .onSnapshot((querySnapshot) => {
+                querySnapshot.forEach((userDoc) => {
+                    const details = userDoc.data()
+                    return details.full_name
+                })
+            })
+    }
+
+    const fetchUserDetails = (userId, threadId) => {
+        var userDetails = []
+
+        db
+            .collection("Users").where("user_id", "==", userId)
+            .onSnapshot((querySnapshot) => {
+
+                setTimeout(() => {
+                    querySnapshot.forEach((userDoc) => {
+                        const details = userDoc.data()
+                        const threadImage = document.getElementById(`thread-image-${threadId}`)
+                        const threadCreatedBy = document.getElementById(`name-bar-${threadId}`)
+                        threadCreatedBy.innerHTML = ``
+                        if (details.profile_image != "") {
+                            threadImage.src = details.profile_image
+                        }
+                        threadCreatedBy.innerHTML = `<b>${details.full_name}</b>`
+                    })
+
+                }, 1000)
+            })
+
+
+        return userDetails
     }
 
     const fetchComments = (threadId) => {
@@ -67,10 +104,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     commentBox.innerHTML = ``
                     querySnapshot.forEach((doc) => {
-                        commentBox.innerHTML +=
-                            commentsSection(doc.data().user_name, doc.data().comment, doc.data().timestamp.toDate())
+                        const _userName = fetchGlobalUser(doc.data().user_id)
+                        setTimeout(() => {
+                            commentBox.innerHTML +=
+                                commentsSection(_userName, doc.data().comment, doc.data().timestamp.toDate())
+                        }, 3000)
                     })
-                }, 2000);
+                }, 4000);
             })
     }
 
@@ -80,35 +120,25 @@ document.addEventListener('DOMContentLoaded', () => {
         .onSnapshot((querySnapshot) => {
 
             setTimeout(() => {
-                threadContainer.innerHTML = ``;
+                threadContainer.innerHTML = ``
 
                 querySnapshot.forEach((doc) => {
 
-                    const thread_elements = CreateThreadElements(doc.data().thread_attachments);
-
-
+                    const thread_elements = CreateThreadElements(doc.data().thread_attachments)
                     const _timeStamp = timeStamp(doc.data().timestamp.toDate())
-
-                    const _commentCount = 0;
-
-                    console.log(doc.data());
-
-                    // db
-                    //     .collection("Users")
-                    //     .orderBy("timestamp", "desc")
-                    //     .onSnapshot((querySnapshot) => {
-
-                    //         querySnapshot.forEach((userDoc) => {
+                    const _commentCount = 0
 
                     fetchComments(doc.id)
+
+                    fetchUserDetails(doc.data().user_id, doc.id)
 
                     threadContainer.innerHTML += `
                                             <div class="thread thread-shadow">
 
                                             <div class="flex">
-                                                <img src="../../resources/images/user_avatar.png" class="thread-image" width="20" alt="">
+                                                <img src="../../resources/images/user_avatar.png" id="thread-image-${doc.id}" class="thread-image" width="20" alt="">
                                                 <i class="fas fa-circle online-user"></i>
-                                                <p class="name-bar"><b>${doc.data().user_name}</b></p>
+                                                <p class="name-bar" id="name-bar-${doc.id}"><b>Loading..</b></p>
                                                 <b class="time-bar text-right flex-auto">${doc.data().timestamp.toDate().toDateString()} ${_timeStamp}</b>
                                             </div>
                             
@@ -138,37 +168,26 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <div id="thread-${doc.id}" class="thread-comments">                        
                                             </div>
                             
-                                        </div>
-                                            `
-
-                    //})
-                    //})
+                                        </div>`
                 });
-
             }, 4000);
         });
 
 })
 
 const postComment = (threadId) => {
-
     const comment = document.getElementById(`post-comment-${threadId}`);
+    if (comment.value != ``) {
+        db.collection("comments")
+            .add({
+                comment: comment.value,
+                thread_id: threadId,
+                user_id: loggedInUser.user_id,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+            .then(() => {
 
-    const userName = loggedInUser.full_name;
-
-    console.log(loggedInUser)
-
-    db.collection("comments")
-        .doc(loggedInUser.user_id)
-        .set({
-            comment: comment.value,
-            thread_id: threadId,
-            user_name: userName,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-        .then(() => {
-            alert('Comment Posted!');
-        })
-        .catch((err) => console.log("err", err));
+            })
+            .catch((err) => console.log("err", err));
+    }
 }
-
