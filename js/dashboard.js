@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     loggedInUser = doc.data();
                     userName.innerHTML = `${doc.data().full_name}`
                     userEmail.innerHTML = `${doc.data().email_address}`
-                    userImage.src = doc.data().profile_image == "" ? "../../resources/images/user_avatar_white.png" : doc.data().profile_image;
+                    userImage.src = doc.data().profile_image == "" ? "../resources/images/user_avatar_white.png" : doc.data().profile_image;
                 } else {
                     console.log("No such document");
                 }
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                             <div class="thread thread-shadow">
 
                                             <div class="flex">
-                                                <img src="../../resources/images/user_avatar.png" id="thread-image-${doc.id}" class="thread-image" width="20" alt="">
+                                                <img src="../resources/images/user_avatar.png" id="thread-image-${doc.id}" class="thread-image" width="20" alt="">
                                                 <i class="fas fa-circle online-user"></i>
                                                 <p class="name-bar" id="name-bar-${doc.id}"><b>Loading..</b></p>
                                                 <b class="time-bar text-right flex-auto">${doc.data().timestamp.toDate().toDateString()} ${_timeStamp}</b>

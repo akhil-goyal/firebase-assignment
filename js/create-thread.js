@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     loggedInUser = doc.data();
                     userName.innerHTML = `${doc.data().full_name}`
                     userEmail.innerHTML = `${doc.data().email_address}`
-                    userImage.src = doc.data().profile_image == "" ? "../../resources/images/user_avatar_white.png" : doc.data().profile_image;
+                    userImage.src = doc.data().profile_image == "" ? "../resources/images/user_avatar_white.png" : doc.data().profile_image;
                 } else {
                     console.log("No such document");
                 }

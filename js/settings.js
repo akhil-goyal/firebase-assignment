@@ -117,11 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentUser.classList.remove(`hidden`)
                     fullName.value = doc.data().full_name;
                     email.value = doc.data().email_address;
-                    profilePicture.src = doc.data().profile_image != "" ? doc.data().profile_image : "../../resources/images/user_avatar.png";
+                    profilePicture.src = doc.data().profile_image != "" ? doc.data().profile_image : "../resources/images/user_avatar.png";
 
                     userName.innerHTML = fullName.value
                     userEmail.innerHTML = email.value
-                    userImage.src = doc.data().profile_image != "" ? doc.data().profile_image : "../../resources/images/user_avatar_white.png";
+                    userImage.src = doc.data().profile_image != "" ? doc.data().profile_image : "../resources/images/user_avatar_white.png";
 
                 } else {
                     console.log("No such document");
