@@ -138,12 +138,12 @@ document.addEventListener('DOMContentLoaded', () => {
         nested_span.classList.add(`file-name`)
         span.setAttribute(`title`, elem.name)
 
-        let nested_i = document.createElement(`i`)
-        nested_i.classList.add(`fas`)
-        nested_i.classList.add(`fa-times`)
+        //let nested_i = document.createElement(`i`)
+        //nested_i.classList.add(`fas`)
+        //nested_i.classList.add(`fa-times`)
 
         span.appendChild(nested_span)
-        span.appendChild(nested_i)
+        //span.appendChild(nested_i)
 
         return span
     }
